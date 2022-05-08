@@ -1,0 +1,1 @@
+const e={key:"v-6d3d064e",path:"/JavaScript/es6/es6-5.html",title:"\u6B63\u5219\u7684\u6269\u5C55",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1651676334e3,contributors:[{name:"TianhuaTang",email:"995850284@qq.com",commits:1}]},filePathRelative:"JavaScript/es6/es6-5.md"};export{e as data};

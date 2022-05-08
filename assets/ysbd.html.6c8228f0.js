@@ -1,0 +1,1 @@
+const t={key:"v-7d250bb3",path:"/formwork/vue/ysbd.html",title:"\u6837\u5F0F\u7ED1\u5B9A",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1651977252e3,contributors:[{name:"TianhuaTang",email:"995850284@qq.com",commits:1}]},filePathRelative:"formwork/vue/ysbd.md"};export{t as data};
