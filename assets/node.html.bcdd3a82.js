@@ -1,3 +1,0 @@
-import{_ as e,d as n}from"./app.2284e78d.js";const a={},r=n(`<h1 id="node\u76F8\u5173" tabindex="-1"><a class="header-anchor" href="#node\u76F8\u5173" aria-hidden="true">#</a> node\u76F8\u5173</h1><h2 id="nrm" tabindex="-1"><a class="header-anchor" href="#nrm" aria-hidden="true">#</a> nrm</h2><div class="language-text ext-text line-numbers-mode"><pre class="language-text"><code>nrm ls // \u67E5\u770Bnrm \u4ED3\u5E93\u5217\u8868
-nrm use ** // \u4F7F\u7528**\u4ED3\u5E93
-</code></pre><div class="line-numbers" aria-hidden="true"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div>`,3);function s(d,t){return r}var c=e(a,[["render",s],["__file","node.html.vue"]]);export{c as default};

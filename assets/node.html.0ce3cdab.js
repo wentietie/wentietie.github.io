@@ -1,1 +1,0 @@
-const e={key:"v-555ef630",path:"/notes/node.html",title:"node\u76F8\u5173",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"nrm",slug:"nrm",children:[]}],git:{updatedTime:null,contributors:[]},filePathRelative:"notes/node.md"};export{e as data};
