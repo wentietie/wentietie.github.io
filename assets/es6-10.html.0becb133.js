@@ -1,0 +1,1 @@
+import{_ as e,o as s,a as t,b as o,d as a}from"./app.acc57b27.js";const _={},c={id:"symbol",tabindex:"-1"},r=o("a",{class:"header-anchor",href:"#symbol","aria-hidden":"true"},"#",-1),n=a(" Symbol"),d=[r,n];function h(i,l){return s(),t("h1",c,d)}var f=e(_,[["render",h],["__file","es6-10.html.vue"]]);export{f as default};
