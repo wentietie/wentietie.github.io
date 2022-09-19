@@ -1,0 +1,1 @@
+const t={key:"v-120f287f",path:"/tang/gitlab/gitlab-error.html",title:"gitlab \u62A5\u9519",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:null,contributors:[]},filePathRelative:"tang/gitlab/gitlab-error.md"};export{t as data};
