@@ -1,0 +1,1 @@
+const t={key:"v-1d3361d5",path:"/tang/server/part3.html",title:"CentOS7\u5B89\u88C5jdk1.8",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1663587527e3,contributors:[{name:"wentietie",email:"wenatie@outlook.com",commits:1}]},filePathRelative:"tang/server/part3.md"};export{t as data};

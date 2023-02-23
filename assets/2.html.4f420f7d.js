@@ -1,0 +1,1 @@
+const t={key:"v-afe394ac",path:"/tang/Python/2.html",title:"1.pip\u4F7F\u7528\u6E05\u534E\u56ED\u4E0B\u8F7Dpackage",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1663587527e3,contributors:[{name:"wentietie",email:"wenatie@outlook.com",commits:1}]},filePathRelative:"tang/Python/2.md"};export{t as data};
