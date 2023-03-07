@@ -1,1 +1,0 @@
-const t={key:"v-ecbd9b84",path:"/tang/k8s/%E9%94%99%E8%AF%AF%E9%9B%86%E9%94%A6/2.html",title:"\u4F7F\u7528\u5BB9\u5668\u5236\u4F5C\u57FA\u7840\u955C\u50CF",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:null,contributors:[]},filePathRelative:"tang/k8s/\u9519\u8BEF\u96C6\u9526/2.md"};export{t as data};
