@@ -1,0 +1,1 @@
+import{_ as t,p as s,q as a,R as e,t as o}from"./framework-5866ffd3.js";const c={},r=e("h1",{id:"symbol",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#symbol","aria-hidden":"true"},"#"),o(" Symbol")],-1),n=[r];function _(d,l){return s(),a("div",null,n)}const h=t(c,[["render",_],["__file","es6-10.html.vue"]]);export{h as default};
