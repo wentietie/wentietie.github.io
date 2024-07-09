@@ -1,1 +1,0 @@
-const t=JSON.parse('{"key":"v-19c9b097","path":"/tang/server/part1.html","title":"CentOS7root账号免密登录","lang":"zh-CN","frontmatter":{},"headers":[],"git":{"updatedTime":1663587527000,"contributors":[{"name":"wentietie","email":"wenatie@outlook.com","commits":1}]},"filePathRelative":"tang/server/part1.md"}');export{t as data};

@@ -1,1 +1,0 @@
-const e=JSON.parse('{"key":"v-2218f774","path":"/gongjushu/webpack/wp-1.html","title":"webpack","lang":"zh-CN","frontmatter":{},"headers":[{"level":2,"title":"","slug":"","link":"#","children":[]}],"git":{"updatedTime":1652185512000,"contributors":[{"name":"TianhuaTang","email":"995850284@qq.com","commits":1}]},"filePathRelative":"gongjushu/webpack/wp-1.md"}');export{e as data};

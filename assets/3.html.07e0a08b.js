@@ -1,1 +1,0 @@
-const t={key:"v-0351db0a",path:"/tang/Prometheus/3.html",title:"",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:1663587527e3,contributors:[{name:"wentietie",email:"wenatie@outlook.com",commits:1}]},filePathRelative:"tang/Prometheus/3.md"};export{t as data};

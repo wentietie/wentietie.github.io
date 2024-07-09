@@ -1,1 +1,0 @@
-const t={key:"v-672ff969",path:"/notes/JS/buding.html",title:"npm\u5305\u6253\u8865\u4E01",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u6B65\u9AA4",slug:"\u6B65\u9AA4",children:[]}],git:{updatedTime:1656380818e3,contributors:[{name:"\u6587\u94C1\u94C1",email:"1179131421@qq.com",commits:1}]},filePathRelative:"notes/JS/buding.md"};export{t as data};

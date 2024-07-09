@@ -1,1 +1,0 @@
-const e={key:"v-569b1548",path:"/notes/JS/beforeunload.html",title:"JS\u4E8B\u4EF6-beforeunload",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[{level:2,title:"\u7528\u6CD5",slug:"\u7528\u6CD5",children:[]}],git:{updatedTime:1653470573e3,contributors:[{name:"\u6587\u94C1\u94C1",email:"1179131421@qq.com",commits:1}]},filePathRelative:"notes/JS/beforeunload.md"};export{e as data};

@@ -1,1 +1,0 @@
-const t=JSON.parse('{"key":"v-afe394ac","path":"/tang/Python/2.html","title":"1.pip使用清华园下载package","lang":"zh-CN","frontmatter":{},"headers":[],"git":{"updatedTime":1663587527000,"contributors":[{"name":"wentietie","email":"wenatie@outlook.com","commits":1}]},"filePathRelative":"tang/Python/2.md"}');export{t as data};

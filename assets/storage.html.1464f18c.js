@@ -1,1 +1,0 @@
-const e={key:"v-40d5af0c",path:"/notes/browser/storage.html",title:"\u672C\u5730\u50A8\u5B58",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:166201985e4,contributors:[{name:"wentietie",email:"wenatie@outlook.com",commits:2}]},filePathRelative:"notes/browser/storage.md"};export{e as data};
