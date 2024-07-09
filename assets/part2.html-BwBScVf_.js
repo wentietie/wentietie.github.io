@@ -1,1 +1,0 @@
-import{_ as t,o as r,c as e}from"./app-DRxAhH5h.js";const a={};function o(c,s){return r(),e("div")}const i=t(a,[["render",o],["__file","part2.html.vue"]]),p=JSON.parse('{"path":"/static/formwork/spring6/part2.html","title":"","lang":"zh-CN","frontmatter":{},"headers":[],"git":{},"filePathRelative":"static/formwork/spring6/part2.md"}');export{i as comp,p as data};

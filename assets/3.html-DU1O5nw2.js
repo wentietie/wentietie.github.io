@@ -1,1 +1,0 @@
-import{_ as t,o as e,c as a}from"./app-DRxAhH5h.js";const c={};function r(o,s){return e(),a("div")}const _=t(c,[["render",r],["__file","3.html.vue"]]),m=JSON.parse('{"path":"/static/tang/Prometheus/3.html","title":"","lang":"zh-CN","frontmatter":{},"headers":[],"git":{},"filePathRelative":"static/tang/Prometheus/3.md"}');export{_ as comp,m as data};
