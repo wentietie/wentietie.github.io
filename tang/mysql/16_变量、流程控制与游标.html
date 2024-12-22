@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Rspress v1.38.0">
+  <title data-rh="true">16 变量、流程控制与游标 - wenatie</title>
+<script>{;const saved = localStorage.getItem('rspress-theme-appearance');const preferDark = window.matchMedia('(prefers-color-scheme: dark)').matches;const isDark = !saved || saved === 'auto' ? preferDark : saved === 'dark';document.documentElement.classList.toggle('dark', isDark);document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';}</script><link rel="icon" href="/rspress-icon.png"><script defer src="/static/js/styles.1737145b.js"></script><script defer src="/static/js/lib-react.bfe73f81.js"></script><script defer src="/static/js/lib-router.aa18f61d.js"></script><script defer src="/static/js/index.df03ac1d.js"></script><link href="/static/css/styles.c26b7a64.css" rel="stylesheet"></head>
+
+<body >
+  <div id="root"><div><div class="navContainer_f6cde rspress-nav px-6 " style="position:sticky"><div class="container_f6cde flex justify-between items-center h-full"><div class="navBarTitle_f6cde"><a class="link_03735 flex items-center w-full h-full text-base font-semibold transition-opacity duration-300 hover:opacity-60 cursor-pointer" target="" href="/index.html"><span>wenatie</span></a></div><div class="flex flex-1 justify-end items-center"><div class="rightNav_f6cde"><div class="flex sm:flex-1 items-center sm:pl-4 sm:pr-2"><div class="rspress-nav-search-button navSearchButton_6e282"><button><svg width="18" height="18" viewBox="0 0 32 32"><path fill="var(--rp-c-gray)" d="m29 27.586-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L27.586 29ZM4 13a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9Z"></path></svg><p class="searchWord_6e282">Search Docs</p><div style="opacity:0"><span></span><span>K</span></div></button></div><div class="mobileNavSearchButton_6e282"><svg width="24" height="24" viewBox="0 0 32 32"><path fill="var(--rp-c-gray)" d="m29 27.586-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L27.586 29ZM4 13a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9Z"></path></svg></div></div><div class="rspress-nav-menu menu h-14"><div class="mx-3 last:mr-0"><div class="relative flex-center h-14"><button class="rspress-nav-menu-group-button flex-center items-center font-medium text-sm text-text-1 hover:text-text-2 transition-colors duration-200"><span class="text-sm font-medium flex" style="margin-right:2px">小唐学习笔记</span><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div class="rspress-nav-menu-group-content absolute mx-0.8 transition-opacity duration-300" style="opacity:0;visibility:hidden;right:0;top:52px"><div class="p-3 pr-2 w-full h-full max-h-100vh whitespace-nowrap" style="box-shadow:var(--rp-shadow-3);z-index:100;border:1px solid var(--rp-c-divider-light);border-radius:var(--rp-radius-large);background:var(--rp-c-bg)"><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/gitlab/gitlab-error.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>gitlab</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/java2/00_前言.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>java</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/mysql/01_MySQL概述.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>mysql</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/docker/Docker.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>docker</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/k8s/学习资料/command.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>k8s</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/Elasticsearch/01_Elasticsearch概述.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>Elasticsearch</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/Prometheus/1.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>Prometheus</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/Python/1.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>Python</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/Vue/1.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>Vue</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/server/CentOS7root账号免密登录.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>服务器环境安装</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/mservice/2.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>微服务</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/项目上线/xiaochengxu.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>项目上线</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/IoTPlatform/jetlinks项目初体验.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>物联网项目</span></div></div></a></div></div></div></div></div></div><div class="mx-3 last:mr-0"><div class="relative flex-center h-14"><button class="rspress-nav-menu-group-button flex-center items-center font-medium text-sm text-text-1 hover:text-text-2 transition-colors duration-200"><span class="text-sm font-medium flex" style="margin-right:2px">前端基础</span><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div class="rspress-nav-menu-group-content absolute mx-0.8 transition-opacity duration-300" style="opacity:0;visibility:hidden;right:0;top:52px"><div class="p-3 pr-2 w-full h-full max-h-100vh whitespace-nowrap" style="box-shadow:var(--rp-shadow-3);z-index:100;border:1px solid var(--rp-c-divider-light);border-radius:var(--rp-radius-large);background:var(--rp-c-bg)"><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/JavaScript/es6/es6-1.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>ES6入门</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/JavaScript/youdontknowjs/part1.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>你不知道的Javascript</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/JavaScript/design/index.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>设计模式</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/JavaScript/typescript/ts-basic.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>typescript</span></div></div></a></div></div></div></div></div></div><div class="mx-3 last:mr-0"><div class="relative flex-center h-14"><button class="rspress-nav-menu-group-button flex-center items-center font-medium text-sm text-text-1 hover:text-text-2 transition-colors duration-200"><span class="text-sm font-medium flex" style="margin-right:2px">框架</span><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div class="rspress-nav-menu-group-content absolute mx-0.8 transition-opacity duration-300" style="opacity:0;visibility:hidden;right:0;top:52px"><div class="p-3 pr-2 w-full h-full max-h-100vh whitespace-nowrap" style="box-shadow:var(--rp-shadow-3);z-index:100;border:1px solid var(--rp-c-divider-light);border-radius:var(--rp-radius-large);background:var(--rp-c-bg)"><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/formwork/vue/vueyuanli.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>vue2</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/formwork/vue3/reactive/part1.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>vue3</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/formwork/harmony/part1.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>鸿蒙</span></div></div></a></div></div></div></div></div></div><div class="mx-3 last:mr-0"><div class="relative flex-center h-14"><button class="rspress-nav-menu-group-button flex-center items-center font-medium text-sm text-text-1 hover:text-text-2 transition-colors duration-200"><span class="text-sm font-medium flex" style="margin-right:2px">计算机基础</span><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div class="rspress-nav-menu-group-content absolute mx-0.8 transition-opacity duration-300" style="opacity:0;visibility:hidden;right:0;top:52px"><div class="p-3 pr-2 w-full h-full max-h-100vh whitespace-nowrap" style="box-shadow:var(--rp-shadow-3);z-index:100;border:1px solid var(--rp-c-divider-light);border-radius:var(--rp-radius-large);background:var(--rp-c-bg)"><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/end/c/data-contruction/part1.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>数据结构（严蔚敏）</span></div></div></a></div></div></div></div></div></div><div class="mx-3 last:mr-0"><div class="relative flex-center h-14"><button class="rspress-nav-menu-group-button flex-center items-center font-medium text-sm text-text-1 hover:text-text-2 transition-colors duration-200"><span class="text-sm font-medium flex" style="margin-right:2px">随笔笔记</span><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div class="rspress-nav-menu-group-content absolute mx-0.8 transition-opacity duration-300" style="opacity:0;visibility:hidden;right:0;top:52px"><div class="p-3 pr-2 w-full h-full max-h-100vh whitespace-nowrap" style="box-shadow:var(--rp-shadow-3);z-index:100;border:1px solid var(--rp-c-divider-light);border-radius:var(--rp-radius-large);background:var(--rp-c-bg)"><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/notes/JS/hwdj.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>JS相关</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/notes/CSS/css-selector.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>CSS相关</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/notes/browser/xmlhttprequest.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>浏览器相关</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/notes/node/node.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>node相关</span></div></div></a></div></div></div></div></div></div></div><div class="flex-center flex-row"><div class="mx-2"><div class="md:mr-2 rspress-nav-appearance"><div class="p-1 border border-solid border-gray-300 text-gray-400  cursor-pointer rounded-md hover:border-gray-600 hover:text-gray-600 dark:hover:border-gray-200 dark:hover:text-gray-200 transition-all duration-300 w-7 h-7"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" class="dark:hidden" width="18" height="18" fill="currentColor"><path d="M12 18c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6zm0-10c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zM12 4c-.6 0-1-.4-1-1V1c0-.6.4-1 1-1s1 .4 1 1v2c0 .6-.4 1-1 1zM12 24c-.6 0-1-.4-1-1v-2c0-.6.4-1 1-1s1 .4 1 1v2c0 .6-.4 1-1 1zM5.6 6.6c-.3 0-.5-.1-.7-.3L3.5 4.9c-.4-.4-.4-1 0-1.4s1-.4 1.4 0l1.4 1.4c.4.4.4 1 0 1.4-.1.2-.4.3-.7.3zM19.8 20.8c-.3 0-.5-.1-.7-.3l-1.4-1.4c-.4-.4-.4-1 0-1.4s1-.4 1.4 0l1.4 1.4c.4.4.4 1 0 1.4-.2.2-.5.3-.7.3zM3 13H1c-.6 0-1-.4-1-1s.4-1 1-1h2c.6 0 1 .4 1 1s-.4 1-1 1zM23 13h-2c-.6 0-1-.4-1-1s.4-1 1-1h2c.6 0 1 .4 1 1s-.4 1-1 1zM4.2 20.8c-.3 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.4-1.4c.4-.4 1-.4 1.4 0s.4 1 0 1.4l-1.4 1.4c-.2.2-.4.3-.7.3zM18.4 6.6c-.3 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.4-1.4c.4-.4 1-.4 1.4 0s.4 1 0 1.4l-1.4 1.4c-.2.2-.5.3-.7.3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" class="hidden dark:block" width="18" height="18" fill="currentColor"><path d="M12.1 22h-.9c-5.5-.5-9.5-5.4-9-10.9.4-4.8 4.2-8.6 9-9 .4 0 .8.2 1 .5.2.3.2.8-.1 1.1-2 2.7-1.4 6.4 1.3 8.4 2.1 1.6 5 1.6 7.1 0 .3-.2.7-.3 1.1-.1.3.2.5.6.5 1-.2 2.7-1.5 5.1-3.6 6.8-1.9 1.4-4.1 2.2-6.4 2.2zM9.3 4.4c-2.9 1-5 3.6-5.2 6.8-.4 4.4 2.8 8.3 7.2 8.7 2.1.2 4.2-.4 5.8-1.8 1.1-.9 1.9-2.1 2.4-3.4-2.5.9-5.3.5-7.5-1.1-2.8-2.2-3.9-5.9-2.7-9.2z"></path></svg></div></div></div></div></div><div class="mobileNavMenu_f6cde"><div class="navScreen_457e8 " id="navScreen"><div class="container_457e8"><div class="navMenu_457e8"><div class="navMenuItem_457e8 w-full"><div class="mx-3 last:mr-0"><div class=" navScreenMenuGroup_457e8 relative"><button class="button_457e8"><span class="buttonSpan_457e8">小唐学习笔记</span><svg width="1em" height="1em" viewBox="0 0 32 32" class=" down_457e8 "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div><div class="items_457e8"><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/gitlab/gitlab-error.html"><div><div class="flex justify-center"><span>gitlab</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/java2/00_前言.html"><div><div class="flex justify-center"><span>java</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/mysql/01_MySQL概述.html"><div><div class="flex justify-center"><span>mysql</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/docker/Docker.html"><div><div class="flex justify-center"><span>docker</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/k8s/学习资料/command.html"><div><div class="flex justify-center"><span>k8s</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/Elasticsearch/01_Elasticsearch概述.html"><div><div class="flex justify-center"><span>Elasticsearch</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/Prometheus/1.html"><div><div class="flex justify-center"><span>Prometheus</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/Python/1.html"><div><div class="flex justify-center"><span>Python</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/Vue/1.html"><div><div class="flex justify-center"><span>Vue</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/server/CentOS7root账号免密登录.html"><div><div class="flex justify-center"><span>服务器环境安装</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/mservice/2.html"><div><div class="flex justify-center"><span>微服务</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/项目上线/xiaochengxu.html"><div><div class="flex justify-center"><span>项目上线</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/IoTPlatform/jetlinks项目初体验.html"><div><div class="flex justify-center"><span>物联网项目</span></div></div></a></div></div></div></div></div></div></div><div class="navMenuItem_457e8 w-full"><div class="mx-3 last:mr-0"><div class=" navScreenMenuGroup_457e8 relative"><button class="button_457e8"><span class="buttonSpan_457e8">前端基础</span><svg width="1em" height="1em" viewBox="0 0 32 32" class=" down_457e8 "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div><div class="items_457e8"><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/JavaScript/es6/es6-1.html"><div><div class="flex justify-center"><span>ES6入门</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/JavaScript/youdontknowjs/part1.html"><div><div class="flex justify-center"><span>你不知道的Javascript</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/JavaScript/design/index.html"><div><div class="flex justify-center"><span>设计模式</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/JavaScript/typescript/ts-basic.html"><div><div class="flex justify-center"><span>typescript</span></div></div></a></div></div></div></div></div></div></div><div class="navMenuItem_457e8 w-full"><div class="mx-3 last:mr-0"><div class=" navScreenMenuGroup_457e8 relative"><button class="button_457e8"><span class="buttonSpan_457e8">框架</span><svg width="1em" height="1em" viewBox="0 0 32 32" class=" down_457e8 "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div><div class="items_457e8"><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/formwork/vue/vueyuanli.html"><div><div class="flex justify-center"><span>vue2</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/formwork/vue3/reactive/part1.html"><div><div class="flex justify-center"><span>vue3</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/formwork/harmony/part1.html"><div><div class="flex justify-center"><span>鸿蒙</span></div></div></a></div></div></div></div></div></div></div><div class="navMenuItem_457e8 w-full"><div class="mx-3 last:mr-0"><div class=" navScreenMenuGroup_457e8 relative"><button class="button_457e8"><span class="buttonSpan_457e8">计算机基础</span><svg width="1em" height="1em" viewBox="0 0 32 32" class=" down_457e8 "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div><div class="items_457e8"><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/end/c/data-contruction/part1.html"><div><div class="flex justify-center"><span>数据结构（严蔚敏）</span></div></div></a></div></div></div></div></div></div></div><div class="navMenuItem_457e8 w-full"><div class="mx-3 last:mr-0"><div class=" navScreenMenuGroup_457e8 relative"><button class="button_457e8"><span class="buttonSpan_457e8">随笔笔记</span><svg width="1em" height="1em" viewBox="0 0 32 32" class=" down_457e8 "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div><div class="items_457e8"><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/notes/JS/hwdj.html"><div><div class="flex justify-center"><span>JS相关</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/notes/CSS/css-selector.html"><div><div class="flex justify-center"><span>CSS相关</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/notes/browser/xmlhttprequest.html"><div><div class="flex justify-center"><span>浏览器相关</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/notes/node/node.html"><div><div class="flex justify-center"><span>node相关</span></div></div></a></div></div></div></div></div></div></div></div><div class="flex-center flex-col gap-2"><div class="mt-2 navAppearance_457e8 flex justify-center"></div></div></div></div><button aria-label="mobile hamburger" class=" navHamburger_e7b06 text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="currentColor"><circle cx="8" cy="16" r="2" fill="currentColor"></circle><circle cx="16" cy="16" r="2" fill="currentColor"></circle><circle cx="24" cy="16" r="2" fill="currentColor"></circle></svg></button></div></div></div></div><section><div class="docLayout_edeb4 pt-0"><div class="rspress-sidebar-menu"><button class="flex-center mr-auto"><div class="text-md mr-2"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M4 6h24v2H4zm0 18h24v2H4zm0-12h24v2H4zm0 6h24v2H4z"></path></svg></div><span class="text-sm">Menu</span></button><button class="flex-center ml-auto"><span class="text-sm">ON THIS PAGE</span><div class="text-md mr-2" style="transform:rotate(0deg);transition:transform 0.2s ease-out;margin-top:2px"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></button><div class="rspress-local-toc-container "><ul><li><a href="#161-变量" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">16.1 变量</span></a></li><li><a href="#1611-系统变量" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">16.1.1 系统变量</span></a></li><li><a href="#1612-用户变量" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">16.1.2 用户变量</span></a></li><li><a href="#162-定义条件与处理程序" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">16.2 定义条件与处理程序</span></a></li><li><a href="#1621-定义条件" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">16.2.1 定义条件</span></a></li><li><a href="#1622-定义处理程序" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">16.2.2 定义处理程序</span></a></li><li><a href="#163-流程控制" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">16.3 流程控制</span></a></li><li><a href="#1631-分支结构之-if" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">16.3.1 分支结构之 IF</span></a></li><li><a href="#1632-分支结构之-case" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">16.3.2 分支结构之 CASE</span></a></li><li><a href="#1633-循环结构之-loop" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">16.3.3 循环结构之 LOOP</span></a></li><li><a href="#1634-循环结构之-while" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">16.3.4 循环结构之 WHILE</span></a></li><li><a href="#1635-循环结构之-repeat" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">16.3.5 循环结构之 REPEAT</span></a></li><li><a href="#1636-loopwhilerepeat的对比" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">16.3.6 LOOP、WHILE、REPEAT的对比</span></a></li><li><a href="#1637-跳转语句之-leave" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">16.3.7 跳转语句之 LEAVE</span></a></li><li><a href="#1638-跳转语句之-iterate" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">16.3.8 跳转语句之 ITERATE</span></a></li><li><a href="#164-游标" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">16.4 游标</span></a></li><li><a href="#1641-概述" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">16.4.1 概述</span></a></li><li><a href="#1642-游标的使用" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">16.4.2 游标的使用</span></a></li><li><a href="#1643-举例" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">16.4.3 举例</span></a></li><li><a href="#1644-游标的优缺点" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">16.4.4 游标的优缺点</span></a></li><li><a href="#165-综合例子" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">16.5 综合例子</span></a></li></ul></div></div><aside class="sidebar_71eca rspress-sidebar "><div class="navTitleMask_71eca"><div class="navBarTitle_f6cde"><a class="link_03735 flex items-center w-full h-full text-base font-semibold transition-opacity duration-300 hover:opacity-60 cursor-pointer" target="" href="/index.html"><span>wenatie</span></a></div></div><div class="rspress-scrollbar sidebarContent_71eca"><nav class="pb-2"><section class="rspress-sidebar-section mt-0.5 block" style="margin-left:0"><div class="rspress-sidebar-collapse flex justify-between items-center menuItem_71eca" style="border-radius:0 var(--rp-radius) var(--rp-radius) 0;cursor:pointer"><h2 class="py-2 px-3 text-sm font-medium flex" style="font-size:14px;padding-left:24px;font-weight:bold"><span class="flex-center" style="font-size:14px">mysql基础查漏补缺</span></h2><div class="collapseContainer_71eca p-2 rounded-xl"><div style="cursor:pointer;transition:transform 0.2s ease-out;transform:rotate(90deg)"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></div></div><div class="transition-all duration-300 ease-in-out" style="overflow:hidden"><div class="rspress-sidebar-group transition-opacity duration-500 ease-in-out" style="opacity:1;margin-left:12px"><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/01_MySQL概述.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>1 MySQL数据库概述</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/02_关系型数据库与非关系型数据库.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>2 关系型数据库与非关系型数据库</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/03_关系型数据库设计原则.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>3 关系型数据库设计原则</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/04_MySQL的登录.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>4 MySQL的登录</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/05_MySQL一些常用命令.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>5 MySQL一些常用命令</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/06_MySQL图形化管理工具.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>6 MySQL图形化管理工具</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/07_运算符.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>7.4 位运算符</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/08_MySQL函数.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>8 MySQL函数</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/09_子查询.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>9 子查询</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/10_管理数据库和数据库表.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>10 数据库和数据库表的管理</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/11_数据的增删改.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>11 数据处理之增删改</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/12_MySQL中的数据类型.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>12.6 日期与时间</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/13_约束.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>13 约束</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/14_视图.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>14 视图</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/15_存储过程与存储函数.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>15 存储过程与存储函数</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/16_变量、流程控制与游标.html"><div class="menuItemActive_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>16 变量、流程控制与游标</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/17_触发器.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>17 触发器</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/18_MySQL8.0新特性.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>18 MySQL8.0新特性</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/19_表及其数据.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>19 附：表及其数据</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mysql/99_MySQL常见问题的解决.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>99 MySQL常见问题的解决</span></div></a></div></div></div></section></nav></div></aside><div class="content_edeb4 rspress-doc-container flex flex-shrink-0 mx-auto"><div class="w-full flex-1"><div><div class="rspress-doc"><!--$--><h1 id="16-变量流程控制与游标" class="text-3xl mb-10 leading-10 tracking-tight title_3b154">16 变量、流程控制与游标<a class="link_3b154 header-anchor" aria-hidden="true" href="#16-变量流程控制与游标">#</a></h1>
+<h2 id="161-变量" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">16.1 变量<a class="link_3b154 header-anchor" aria-hidden="true" href="#161-变量">#</a></h2>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">系统变量</p>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">全局系统变量</li>
+<li class="[&amp;:not(:first-child)]:mt-2">会话系统变量（<strong class="font-semibold">默认</strong>）</li>
+</ul>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">用户自定义变量</p>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">会话用户变量</li>
+<li class="[&amp;:not(:first-child)]:mt-2">局部变量</li>
+</ul>
+</li>
+</ul>
+<h3 id="1611-系统变量" class="mt-10 mb-2 leading-7 text-xl title_3b154">16.1.1 系统变量<a class="link_3b154 header-anchor" aria-hidden="true" href="#1611-系统变量">#</a></h3>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">概述</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">定义：变量由系统定义，不是用户定义，属于服务器层面。启动MySQL服务，生成MySQL服务实例期间， MySQL将为MySQL服务器内存中的系统变量赋值，这些系统变量定义了当前MySQL服务实例的属性、特 征。这些<strong class="font-semibold">系统变量的值要么是 编译MySQL时参数的默认值，要么是 配置文件 （例如my.ini等）中的参数值</strong>。</li>
+<li class="[&amp;:not(:first-child)]:mt-2">系统变量分为<code>全局系统变量</code>（需要添加<code> global</code> 关键字）以及<code>会话系统变量</code>（需要添加<code> session </code>关键字）。如果不写，<strong class="font-semibold">默认会话级别</strong>。</li>
+<li class="[&amp;:not(:first-child)]:mt-2">有时也把全局系统变量简称为<em>全局变量</em>，有时也把会话系统变量称为<em>local变量</em>。</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><code>静态变量</code>（在 MySQL 服务实例运行期间它们的值不能使用 set 动态修改）<strong class="font-semibold">属于特殊的全局系统变量</strong>。</li>
+<li class="[&amp;:not(:first-child)]:mt-2">全局系统变量针对于所有会话有效，但是<strong class="font-semibold">不能跨重启</strong></li>
+<li class="[&amp;:not(:first-child)]:mt-2">会话系统变量，只针对当前会话有效。</li>
+<li class="[&amp;:not(:first-child)]:mt-2">会话1针对某个全局系统变量值的修改，会导致会话2中同一个全局变量的值的修改。</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><strong class="font-semibold">有些系统变量只能是全局的</strong>，例如 max_connections 用于限制服务器的最大连接数；<strong class="font-semibold">有些系统变量作用域既可以是全局又可以是会话</strong>，例如 character_set_client 用于设置客户端的字符集；<strong class="font-semibold">有些系统变量的作用域只能是当前会话</strong>，例如 pseudo_thread_id 用于标记当前会话的 MySQL 连接 ID</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">查看系统变量</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">查看所有或部分系统变量</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>#查看所有全局变量
+</span></span><span style="display:block;padding:0 1.25rem">SHOW GLOBAL VARIABLES;
+</span><span style="display:block;padding:0 1.25rem">#查看所有会话变量
+</span><span style="display:block;padding:0 1.25rem">SHOW [SESSION] VARIABLES;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">#查看满足条件的部分系统变量。
+</span><span style="display:block;padding:0 1.25rem">SHOW GLOBAL VARIABLES LIKE &#x27;模糊查询条件&#x27;;
+</span><span style="display:block;padding:0 1.25rem">#查看满足条件的部分会话变量
+</span><span style="display:block;padding:0 1.25rem">SHOW [SESSION] VARIABLES LIKE &#x27;模糊查询条件&#x27;;</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">查看指定系统变量</p>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2"><code>@@global</code>开头表示全局系统变量</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><code>@@session</code>开头表示会话系统变量</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><code>@@</code>开头，首先会查询会话系统变量，如果会话系统不存在，再去查全局系统变量</li>
+</ul>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>#查看指定的系统变量的值
+</span></span><span style="display:block;padding:0 1.25rem">SELECT @@global.变量名;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">#查看指定的会话变量的值
+</span><span style="display:block;padding:0 1.25rem">SELECT @@session.变量名;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">#先匹配会话系统变量，不存在的话再去匹配全局系统变量
+</span><span style="display:block;padding:0 1.25rem">SELECT @@变量名;</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">修改系统变量的值</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">方法一：</p>
+<p class="my-4 leading-7">修改MySQL 配置文件<code>my.ini</code> ，继而修改MySQL系统变量的值（该方法需要重启MySQL服务）</p>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">方法二：</p>
+<p class="my-4 leading-7">在MySQL服务运行期间，使用<code>set</code>命令重新设置系统变量的值，语法如下：</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span># 为全局系统变量赋值
+</span></span><span style="display:block;padding:0 1.25rem">SET @@global.变量名=变量值;
+</span><span style="display:block;padding:0 1.25rem">#方式2：
+</span><span style="display:block;padding:0 1.25rem">SET GLOBAL 变量名=变量值;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">#为会话系统变量赋值
+</span><span style="display:block;padding:0 1.25rem">#方式1：
+</span><span style="display:block;padding:0 1.25rem">SET @@session.变量名=变量值;
+</span><span style="display:block;padding:0 1.25rem">#方式2：
+</span><span style="display:block;padding:0 1.25rem">SET SESSION 变量名=变量值;</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">MySQL8.0新特性：全局变量的持久化</p>
+</blockquote>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>SET PERSIST GLOBAL  全局系统变量名 = 值;</span></span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">数据库重启后，值仍有效</li>
+<li class="[&amp;:not(:first-child)]:mt-2">MySQL会将该命令的配置保存到数据目录下的<code>mysqld-auto.cnf</code>文件中，下次启动时会读取该文件，用其中的配置来覆盖默认配置</li>
+</ul>
+<h3 id="1612-用户变量" class="mt-10 mb-2 leading-7 text-xl title_3b154">16.1.2 用户变量<a class="link_3b154 header-anchor" aria-hidden="true" href="#1612-用户变量">#</a></h3>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">概述</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">定义：用户变量是用户自己定义的，作为 MySQL 编码规范，MySQL 中的用户变量以 <code>@</code> 开头。</li>
+<li class="[&amp;:not(:first-child)]:mt-2">分类：<!-- -->
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2"><code>会话用户变量</code>：作用域是当前会话，只对当前连接有效</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><code>局部变量</code>：只在存储过程或者存储函数的BEGIN ... END语句中有效。</li>
+</ul>
+</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">用户变量的定义</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">会话级用户变量</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span># 定义
+</span></span><span style="display:block;padding:0 1.25rem"># 方式1：使用“=”或者“:=”
+</span><span style="display:block;padding:0 1.25rem">SET @用户变量 = 值;
+</span><span style="display:block;padding:0 1.25rem">SET @用户变量:= 值;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem"># 方式2：使用“:=”或者“INTO”关键字
+</span><span style="display:block;padding:0 1.25rem">SELECT @用户变量 := 表达式 [FROM 子句];
+</span><span style="display:block;padding:0 1.25rem">SELECT 表达式（或者字段名） INTO @用户变量 [FROM 子句];</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">局部变量</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span># 声明
+</span></span><span style="display:block;padding:0 1.25rem">DECLARE 变量名 类型 [default 值]; # 如果没有DEFAULT子句，初始值为NULL
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem"># 赋值方式1：
+</span><span style="display:block;padding:0 1.25rem">SET 变量名 = 值;
+</span><span style="display:block;padding:0 1.25rem"># 赋值方式2：
+</span><span style="display:block;padding:0 1.25rem">SELECT 表达式（或者字段名） INTO 变量名 [FROM 子句];</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">用户变量的查看</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">会话用户变量</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>SELECT @会话用户变量</span></span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">局部变量</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>SELECT 局部变量名;</span></span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">会话用户变量 VS 局部变量</p>
+</blockquote>
+<table class="block border-collapse text-base my-5 overflow-x-auto leading-7 border-gray-light-3 dark:border-divider">
+<thead>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<th class="border border-solid px-4 py-2 text-text-1 text-base font-semibold border-gray-light-3 dark:border-divider"></th>
+<th class="border border-solid px-4 py-2 text-text-1 text-base font-semibold border-gray-light-3 dark:border-divider">作用域</th>
+<th class="border border-solid px-4 py-2 text-text-1 text-base font-semibold border-gray-light-3 dark:border-divider">定义位置</th>
+<th class="border border-solid px-4 py-2 text-text-1 text-base font-semibold border-gray-light-3 dark:border-divider">语法</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">会话用户变量</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">当前会话</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">会话的任意位置</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">使用@符号，不用指定类型</td>
+</tr>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">局部变量</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">声明的BEGIN ... END 语句中</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">BEGIN ... END语句中的第一句代码</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">使用DECLARE，需要指定类型</td>
+</tr>
+</tbody>
+</table>
+<h2 id="162-定义条件与处理程序" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">16.2 定义条件与处理程序<a class="link_3b154 header-anchor" aria-hidden="true" href="#162-定义条件与处理程序">#</a></h2>
+<p class="my-4 leading-7"><code>定义条件</code>是事先定义程序执行过程中可能遇到的问题，<code>处理程序</code>定义了在遇到问题时应当采取的处理方式，并且保证存储过程或函数在遇到警告或错误时能够继续执行。这样可以增强存储过程或者存储程序处理问题的能力，增强程序的健壮性，避免程序异常停止运行。<strong class="font-semibold">类似于Java的异常处理机制。</strong></p>
+<h3 id="1621-定义条件" class="mt-10 mb-2 leading-7 text-xl title_3b154">16.2.1 定义条件<a class="link_3b154 header-anchor" aria-hidden="true" href="#1621-定义条件">#</a></h3>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">定义</p>
+</blockquote>
+<p class="my-4 leading-7"><code>定义条件</code>就是<strong class="font-semibold">给MySQL中的错误命名</strong>，有助于存储的程序代码更清晰。它将一个<code>错误名字</code>和<code>错误条件</code>关联起来，随后可以被用在<!-- -->定义处理程序<!-- -->的<code>DECLARE HANDLER</code>语句中。</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">语法</p>
+</blockquote>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>DECLARE 错误名字 CONDITION FOR 错误码|错误条件</span></span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2"><code>MySQL_error_code</code>和<code>sqlstate_value</code>都可以表示MySQL的错误。<!-- -->
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2"><code>MySQL_error_code</code>：是数值型的错误代码</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><code>sqlstate_value</code>：是长度为5的字符串类型的错误代码</li>
+</ul>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><code>例子</code>：在“ERROR 1418 (HY000)”中，1418是MySQL_error_code，“HY000”是sqlstate_value。</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><code>例子</code>：在“ERROR 1142（42000）”中，1142是MySQL_error_code，“42000”是sqlstate_value。</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">定义条件举例</p>
+</blockquote>
+<p class="my-4 leading-7"><code>例</code>定义“Field_Not_Be_NULL”错误名与MySQL中违反非空约束的错误类型是“ERROR 1048 (23000)”对应</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>#方法1：使用MySQL_error_code
+</span></span><span style="display:block;padding:0 1.25rem">DECLARE Field_Not_Be_NULL CONDITION FOR 1048;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">#方法2：使用sqlstate_value
+</span><span style="display:block;padding:0 1.25rem">DECLARE Field_Not_Be_NULL CONDITION FOR SQLSTATE &#x27;23000&#x27;</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h3 id="1622-定义处理程序" class="mt-10 mb-2 leading-7 text-xl title_3b154">16.2.2 定义处理程序<a class="link_3b154 header-anchor" aria-hidden="true" href="#1622-定义处理程序">#</a></h3>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">定义</p>
+</blockquote>
+<p class="my-4 leading-7">可以为SQL执行过程中发生的某种类型的错误定义特殊的处理程序。</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">语法</p>
+</blockquote>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>DECLARE 处理方式 HANDLER FOR 错误类型 处理语句</span></span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7"><strong class="font-semibold">处理方式</strong>：取值如下：</p>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2"><code>CONTINUE</code>：表示遇到指定的错误类型不处理，继续执行</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><code>EXIT</code>：表示遇到指定的错误类型马上退出</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><code>UNDO</code>：表示遇到指定的错误类型后撤回之前的操作。<strong class="font-semibold">MySQL中暂时不支持该操作</strong></li>
+</ul>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7"><strong class="font-semibold">错误类型</strong>：取值如下：</p>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2"><code>SQLSTATE &#x27;字符串错误码&#x27;</code>：表示长度为5的字符串类型的错误代码</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><code>MySQL_error_code错误代码</code>：匹配数值类型的错误码</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><code>错误名称</code>：表示DECLARE ... CONDITION定义的错误条件名称</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><code>SQLWARNING</code>：匹配所有以01开头的SQLSTATE错误代码</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><code>NOT FOUND</code>：匹配所有以02开头的SQLSTATE错误代码；</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><code>SQLEXCEPTION</code>：匹配所有没有被SQLWARNING或NOT FOUND捕获的SQLSTATE错误代码</li>
+</ul>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7"><strong class="font-semibold">处理语句</strong>：如果出现上述条件之一，则采用对应的处理方式，并执行指定的处理语句。</p>
+<p class="my-4 leading-7">处理语句可以是<code> SET 变量 = 值 </code>这样的简单语句，也可以是<code>BEGIN ... END</code>编写的复杂语句</p>
+</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">例子</p>
+</blockquote>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>#方法1：捕获sqlstate_value
+</span></span><span style="display:block;padding:0 1.25rem">DECLARE CONTINUE HANDLER FOR SQLSTATE &#x27;42S02&#x27; SET @info = &#x27;NO_SUCH_TABLE&#x27;;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">#方法2：捕获mysql_error_value
+</span><span style="display:block;padding:0 1.25rem">DECLARE CONTINUE HANDLER FOR 1146 SET @info = &#x27;NO_SUCH_TABLE&#x27;;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">#方法3：先定义条件，再调用
+</span><span style="display:block;padding:0 1.25rem">DECLARE no_such_table CONDITION FOR 1146;
+</span><span style="display:block;padding:0 1.25rem">DECLARE CONTINUE HANDLER FOR NO_SUCH_TABLE SET @info = &#x27;NO_SUCH_TABLE&#x27;;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">#方法4：使用SQLWARNING
+</span><span style="display:block;padding:0 1.25rem">DECLARE EXIT HANDLER FOR SQLWARNING SET @info = &#x27;ERROR&#x27;;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">#方法5：使用NOT FOUND
+</span><span style="display:block;padding:0 1.25rem">DECLARE EXIT HANDLER FOR NOT FOUND SET @info = &#x27;NO_SUCH_TABLE&#x27;;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">#方法6：使用SQLEXCEPTION
+</span><span style="display:block;padding:0 1.25rem">DECLARE EXIT HANDLER FOR SQLEXCEPTION SET @info = &#x27;ERROR&#x27;;</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h2 id="163-流程控制" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">16.3 流程控制<a class="link_3b154 header-anchor" aria-hidden="true" href="#163-流程控制">#</a></h2>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">流程的分类</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2"><strong class="font-semibold">顺序结构</strong>：程序从上往下依次执行</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><strong class="font-semibold">分支结构</strong>：程序按照条件进行选择执行，从两条或者多条路径中选择一条执行</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><strong class="font-semibold">循环结构</strong>：程序满足一定条件下，重复执行一组语句</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">流程控制语句的分类</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2"><strong class="font-semibold">条件判断语句</strong>：IF 语句或者 CASE 语句</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><strong class="font-semibold">循环语句</strong>：LOOP 语句、WHILE 语句或者 REPEAT语句</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><strong class="font-semibold">跳转语句</strong>：ITERATE 语句和 LEAVE 语句</li>
+</ul>
+<h3 id="1631-分支结构之-if" class="mt-10 mb-2 leading-7 text-xl title_3b154">16.3.1 分支结构之 IF<a class="link_3b154 header-anchor" aria-hidden="true" href="#1631-分支结构之-if">#</a></h3>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">语法</p>
+</blockquote>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>IF 表达式1 THEN 操作1
+</span></span><span style="display:block;padding:0 1.25rem">[ELSEIF 表达式2 THEN 操作2]……
+</span><span style="display:block;padding:0 1.25rem">[ELSE 操作N]
+</span><span style="display:block;padding:0 1.25rem">END IF;</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">举例</p>
+</blockquote>
+<p class="my-4 leading-7"><code>例</code>声明存储过程“update_salary_by_eid2”，定义IN参数emp_id，输入员工编号。判断该员工薪资如果低于9000元并且入职时间超过5年，就涨薪500元；否则就涨薪100元。</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span># 定义存储过程
+</span></span><span style="display:block;padding:0 1.25rem">DELIMITER $
+</span><span style="display:block;padding:0 1.25rem">CREATE PROCEDURE update_salary_by_eid2(IN emp_id INT)
+</span><span style="display:block;padding:0 1.25rem">BEGIN
+</span><span style="display:block;padding:0 1.25rem">	DECLARE emp_salary DOUBLE;
+</span><span style="display:block;padding:0 1.25rem">	DECLARE emp_years DOUBLE;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	SELECT salary, DATEDIFF(CURRENT_DATE(), hire_date)/365 INTO emp_salary, emp_years
+</span><span style="display:block;padding:0 1.25rem">	FROM emps
+</span><span style="display:block;padding:0 1.25rem">	WHERE employee_id = emp_id;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	IF emp_salary &lt; 9000 AND emp_years &gt;= 5 
+</span><span style="display:block;padding:0 1.25rem">		THEN UPDATE emps SET salary = salary + 500 WHERE employee_id = emp_id;
+</span><span style="display:block;padding:0 1.25rem">	ELSE 
+</span><span style="display:block;padding:0 1.25rem">		UPDATE emps SET salary = salary + 100 WHERE employee_id = emp_id;
+</span><span style="display:block;padding:0 1.25rem">	END IF;
+</span><span style="display:block;padding:0 1.25rem">END $
+</span><span style="display:block;padding:0 1.25rem">DELIMITER ;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem"># 调用存储过程
+</span><span style="display:block;padding:0 1.25rem">CALL update_salary_by_eid2(104);</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h3 id="1632-分支结构之-case" class="mt-10 mb-2 leading-7 text-xl title_3b154">16.3.2 分支结构之 CASE<a class="link_3b154 header-anchor" aria-hidden="true" href="#1632-分支结构之-case">#</a></h3>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">语法1：类似于Java中的switch语句</p>
+</blockquote>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>CASE 表达式
+</span></span><span style="display:block;padding:0 1.25rem">WHEN 值1 THEN 结果1或语句1(如果是语句，需要加分号)
+</span><span style="display:block;padding:0 1.25rem">WHEN 值2 THEN 结果2或语句2(如果是语句，需要加分号)
+</span><span style="display:block;padding:0 1.25rem">...
+</span><span style="display:block;padding:0 1.25rem">ELSE 结果n或语句n(如果是语句，需要加分号)
+</span><span style="display:block;padding:0 1.25rem">END CASE;  # 注意：如果是放在begin end中需要加上case，如果放在select后面不需要</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">语法2：类似于Java中的多重if</p>
+</blockquote>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>CASE
+</span></span><span style="display:block;padding:0 1.25rem">WHEN 条件1 THEN 结果1或语句1(如果是语句，需要加分号)
+</span><span style="display:block;padding:0 1.25rem">WHEN 条件2 THEN 结果2或语句2(如果是语句，需要加分号)
+</span><span style="display:block;padding:0 1.25rem">...
+</span><span style="display:block;padding:0 1.25rem">ELSE 结果n或语句n(如果是语句，需要加分号)
+</span><span style="display:block;padding:0 1.25rem">END CASE; # 注意：如果是放在begin end中需要加上case，如果放在select后面不需要</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">举例</p>
+</blockquote>
+<p class="my-4 leading-7"><code>例</code>声明存储过程“update_salary_by_eid4”，定义IN参数emp_id，输入员工编号。判断该员工薪资如果低于9000元，就更新薪资为9000元；薪资大于等于9000元且低于10000的，但是奖金比例为NULL的，就更新奖金比例为0.01；其他的涨薪100元。</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span># 声明存储过程	
+</span></span><span style="display:block;padding:0 1.25rem">DELIMITER $
+</span><span style="display:block;padding:0 1.25rem">CREATE PROCEDURE update_salary_by_eid4(IN emp_id INT)
+</span><span style="display:block;padding:0 1.25rem">BEGIN
+</span><span style="display:block;padding:0 1.25rem">	DECLARE emp_sal DOUBLE;
+</span><span style="display:block;padding:0 1.25rem">	DECLARE emp_bonus DOUBLE;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	SELECT salary, commission_pct INTO emp_sal, emp_bonus FROM emps WHERE employee_id = emp_id;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	CASE 
+</span><span style="display:block;padding:0 1.25rem">		WHEN emp_sal &lt; 9000 
+</span><span style="display:block;padding:0 1.25rem">			THEN UPDATE emps SET salary = 9000 WHERE employee_id = emp_id;
+</span><span style="display:block;padding:0 1.25rem">		WHEN emp_sal &gt;= 9000 AND emp_sal &lt; 10000 AND emp_bonus IS NULL 
+</span><span style="display:block;padding:0 1.25rem">			THEN UPDATE emps SET commission_pct = 0.01 WHERE employee_id = emp_id;
+</span><span style="display:block;padding:0 1.25rem">		ELSE
+</span><span style="display:block;padding:0 1.25rem">			UPDATE emps SET salary = salary + 100 WHERE employee_id = emp_id;
+</span><span style="display:block;padding:0 1.25rem">	END CASE;
+</span><span style="display:block;padding:0 1.25rem">END $
+</span><span style="display:block;padding:0 1.25rem">DELIMITER ;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem"># 调用 
+</span><span style="display:block;padding:0 1.25rem">CALL update_salary_by_eid4(100)</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h3 id="1633-循环结构之-loop" class="mt-10 mb-2 leading-7 text-xl title_3b154">16.3.3 循环结构之 LOOP<a class="link_3b154 header-anchor" aria-hidden="true" href="#1633-循环结构之-loop">#</a></h3>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">语法</p>
+</blockquote>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>[loop_label]: LOOP
+</span></span><span style="display:block;padding:0 1.25rem">	循环体
+</span><span style="display:block;padding:0 1.25rem">END LOOP [loop_label];</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2"><code>loop_label</code>：当前LOOP循环语句的标注名称，在使用LEAVE跳出循环时会用到</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">举例</p>
+</blockquote>
+<p class="my-4 leading-7"><code>例</code>当市场环境变好时，公司为了奖励大家，决定给大家涨工资。声明存储过程“update_salary_loop()”，声明OUT参数num，输出循环次数。存储过程中实现循环给大家涨薪，薪资涨为原来的1.1倍，直到全公司的平均薪资达到12000结束，并统计循环次数。</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span># 声明存储过程
+</span></span><span style="display:block;padding:0 1.25rem">DELIMITER //
+</span><span style="display:block;padding:0 1.25rem">CREATE PROCEDURE update_salary_loop(OUT num INT)
+</span><span style="display:block;padding:0 1.25rem">BEGIN
+</span><span style="display:block;padding:0 1.25rem">	DECLARE avg_sal DOUBLE;
+</span><span style="display:block;padding:0 1.25rem">	SET num := 0;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	SELECT AVG(salary) INTO avg_sal FROM emps;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	add_salary:LOOP
+</span><span style="display:block;padding:0 1.25rem">			# 循环退出条件
+</span><span style="display:block;padding:0 1.25rem">			IF avg_sal &gt;= 12000 THEN LEAVE add_salary; 
+</span><span style="display:block;padding:0 1.25rem">			END IF;
+</span><span style="display:block;padding:0 1.25rem">			
+</span><span style="display:block;padding:0 1.25rem">			# 统计循环次数
+</span><span style="display:block;padding:0 1.25rem">			SET num := num + 1; 
+</span><span style="display:block;padding:0 1.25rem">			
+</span><span style="display:block;padding:0 1.25rem">			# 更新薪资
+</span><span style="display:block;padding:0 1.25rem">			UPDATE emps SET salary = salary * 1.1; 
+</span><span style="display:block;padding:0 1.25rem">			
+</span><span style="display:block;padding:0 1.25rem">			# 查询更新后的平均薪资
+</span><span style="display:block;padding:0 1.25rem">			SELECT AVG(salary) INTO avg_sal FROM emps; 
+</span><span style="display:block;padding:0 1.25rem">	END LOOP add_salary;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">END //
+</span><span style="display:block;padding:0 1.25rem">DELIMITER ;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem"># 调用存储过程
+</span><span style="display:block;padding:0 1.25rem">set @num := 0;
+</span><span style="display:block;padding:0 1.25rem">call update_salary_loop(@num);
+</span><span style="display:block;padding:0 1.25rem">SELECT @num;</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h3 id="1634-循环结构之-while" class="mt-10 mb-2 leading-7 text-xl title_3b154">16.3.4 循环结构之 WHILE<a class="link_3b154 header-anchor" aria-hidden="true" href="#1634-循环结构之-while">#</a></h3>
+<p class="my-4 leading-7">WHILE在执行语句执行时，<strong class="font-semibold">先对指定的表达式进行判断</strong>，如 果为真，就执行循环内的语句，否则退出循环。</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">语法</p>
+</blockquote>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>[while_label:] WHILE 循环条件 DO
+</span></span><span style="display:block;padding:0 1.25rem">循环体
+</span><span style="display:block;padding:0 1.25rem">END WHILE [while_label];</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2"><code>while_label</code>：当前WHILE循环语句的标注名称。</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">例子</p>
+</blockquote>
+<p class="my-4 leading-7"><code>例</code>市场环境不好时，公司为了渡过难关，决定暂时降低大家的薪资。声明存储过程“update_salary_while()”，声明OUT参数num，输出循环次数。存储过程中实现循环给大家降薪，薪资降为原来的90%。直到全公司的平均薪资达到5000结束，并统计循环次数。</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span># 声明存储过程	
+</span></span><span style="display:block;padding:0 1.25rem">delimiter $
+</span><span style="display:block;padding:0 1.25rem">create procedure update_salary_while(out num int)
+</span><span style="display:block;padding:0 1.25rem">begin 
+</span><span style="display:block;padding:0 1.25rem">	# 声明变量
+</span><span style="display:block;padding:0 1.25rem">	declare avg_sal double; # 记录公司平均薪资
+</span><span style="display:block;padding:0 1.25rem">	declare loop_num int default 0; # 记录循环次数
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	# 初始化avg_sal
+</span><span style="display:block;padding:0 1.25rem">	select avg(salary) into avg_sal from emps;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	# 循环降薪
+</span><span style="display:block;padding:0 1.25rem">	sub_salary: while avg_sal &gt; 5000 DO
+</span><span style="display:block;padding:0 1.25rem">		# 降薪
+</span><span style="display:block;padding:0 1.25rem">		update emps set salary = salary * 0.9;
+</span><span style="display:block;padding:0 1.25rem">		# 记录循环次数
+</span><span style="display:block;padding:0 1.25rem">		set loop_num = loop_num + 1;
+</span><span style="display:block;padding:0 1.25rem">		# 重新计算平均工资
+</span><span style="display:block;padding:0 1.25rem">		select avg(salary) into avg_sal from emps;
+</span><span style="display:block;padding:0 1.25rem">	end while sub_salary;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	# 给out参数赋值
+</span><span style="display:block;padding:0 1.25rem">	set num = loop_num;
+</span><span style="display:block;padding:0 1.25rem">end $
+</span><span style="display:block;padding:0 1.25rem">delimiter ;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem"># 调用存储过程
+</span><span style="display:block;padding:0 1.25rem">call update_salary_while(@num);
+</span><span style="display:block;padding:0 1.25rem">select @num;</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h3 id="1635-循环结构之-repeat" class="mt-10 mb-2 leading-7 text-xl title_3b154">16.3.5 循环结构之 REPEAT<a class="link_3b154 header-anchor" aria-hidden="true" href="#1635-循环结构之-repeat">#</a></h3>
+<p class="my-4 leading-7">REPEAT 循环<strong class="font-semibold">首先会执行一次循 环，然后在 UNTIL 中进行表达式的判断</strong>，如果满足条件就退出，即 END REPEAT；如果条件不满足，则会 就继续执行循环，直到满足退出条件为止。</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">语法</p>
+</blockquote>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>[repeat_label]:REPEAT
+</span></span><span style="display:block;padding:0 1.25rem">	循环体
+</span><span style="display:block;padding:0 1.25rem">	UNTIL 循环结束条件
+</span><span style="display:block;padding:0 1.25rem">END REPEAT [repeat_label];</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2"><code>repeat_label</code>：当前REPEAT循环语句的标注名称。</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">例子</p>
+</blockquote>
+<p class="my-4 leading-7"><code>例</code>当市场环境变好时，公司为了奖励大家，决定给大家涨工资。声明存储过程“update_salary_repeat()”，声明OUT参数num，输出循环次数。存储过程中实现循环给大家涨薪，薪资涨为原来的1.15倍。直到全公司的平均薪资达到13000结束，并统计循环次数。</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span># 声明存储过程	
+</span></span><span style="display:block;padding:0 1.25rem">delimiter $
+</span><span style="display:block;padding:0 1.25rem">create procedure update_salary_repeat(out num int)
+</span><span style="display:block;padding:0 1.25rem">begin
+</span><span style="display:block;padding:0 1.25rem">	declare avg_sal DOUBLE;
+</span><span style="display:block;padding:0 1.25rem">	declare repeat_count int default 0;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	select avg(salary) into avg_sal from emps;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	add_salary:repeat
+</span><span style="display:block;padding:0 1.25rem">		update emps set salary = salary * 1.15;
+</span><span style="display:block;padding:0 1.25rem">		set repeat_count = repeat_count + 1;
+</span><span style="display:block;padding:0 1.25rem">		select avg(salary) into avg_sal from emps;
+</span><span style="display:block;padding:0 1.25rem">		until avg_sal &gt;= 13000
+</span><span style="display:block;padding:0 1.25rem">	end repeat add_salary;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	set num = repeat_count;
+</span><span style="display:block;padding:0 1.25rem">end $
+</span><span style="display:block;padding:0 1.25rem">delimiter ;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem"># 调用循环
+</span><span style="display:block;padding:0 1.25rem">call update_salary_repeat(@num);
+</span><span style="display:block;padding:0 1.25rem">select @num;</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h3 id="1636-loopwhilerepeat的对比" class="mt-10 mb-2 leading-7 text-xl title_3b154">16.3.6 LOOP、WHILE、REPEAT的对比<a class="link_3b154 header-anchor" aria-hidden="true" href="#1636-loopwhilerepeat的对比">#</a></h3>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7"><strong class="font-semibold">相同点</strong>：</p>
+<p class="my-4 leading-7">三者都可以省略标注名称，但是如果在循环中添加了循环控制语句（LEAVE或ITERATE）则必须添加标注名称。</p>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7"><strong class="font-semibold">不同点</strong>：</p>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2"><code>LOOP</code>：一般用于实现简单的“死”循环</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><code>WHILE</code>：先判断，后执行</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><code>REPEAT</code>：先执行，后判断。无条件至少执行一次</li>
+</ul>
+</li>
+</ul>
+<h3 id="1637-跳转语句之-leave" class="mt-10 mb-2 leading-7 text-xl title_3b154">16.3.7 跳转语句之 LEAVE<a class="link_3b154 header-anchor" aria-hidden="true" href="#1637-跳转语句之-leave">#</a></h3>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">作用</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">可以用在<code>BEGIN ... END</code>语句中，表示跳出程序体</li>
+<li class="[&amp;:not(:first-child)]:mt-2">可以用在循环体内，表示跳出循环</li>
+</ul>
+<p class="my-4 leading-7">相当于<code>break</code>。</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">语法</p>
+</blockquote>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>LEAVE 标记名</span></span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">举例</p>
+</blockquote>
+<p class="my-4 leading-7"><code>例</code><strong class="font-semibold">跳出 BEGIN ... END 语句</strong>。</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>DELIMITER //
+</span></span><span style="display:block;padding:0 1.25rem">CREATE PROCEDURE leave_begin(IN num INT)
+</span><span style="display:block;padding:0 1.25rem">begin_label:BEGIN
+</span><span style="display:block;padding:0 1.25rem">	IF num &lt;= 0
+</span><span style="display:block;padding:0 1.25rem">		THEN LEAVE begin_label; # 跳出程序体
+</span><span style="display:block;padding:0 1.25rem">	ELSEIF num = 1
+</span><span style="display:block;padding:0 1.25rem">		THEN SELECT AVG(salary) FROM emps;
+</span><span style="display:block;padding:0 1.25rem">	ELSEIF num = 2
+</span><span style="display:block;padding:0 1.25rem">		THEN SELECT MIN(salary) FROM emps;
+</span><span style="display:block;padding:0 1.25rem">	ELSE 
+</span><span style="display:block;padding:0 1.25rem">		SELECT MAX(salary) FROM emps;
+</span><span style="display:block;padding:0 1.25rem">	END IF;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	#查询总人数
+</span><span style="display:block;padding:0 1.25rem">	SELECT COUNT(*) FROM emps;
+</span><span style="display:block;padding:0 1.25rem">END //
+</span><span style="display:block;padding:0 1.25rem">DELIMITER ;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">#调用
+</span><span style="display:block;padding:0 1.25rem">CALL leave_begin(1);</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7"><code>例</code><strong class="font-semibold">跳出while循环</strong></p>
+<p class="my-4 leading-7">当市场环境不好时，公司为了渡过难关，决定暂时降低大家的薪资。声明存储过程“leave_while()”，声明OUT参数num，输出循环次数，存储过程中使用WHILE循环给大家降低薪资为原来薪资的90%，直到全公司的平均薪资小于等于10000，并统计循环次数。</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span># 声明存储过程
+</span></span><span style="display:block;padding:0 1.25rem">delimiter $
+</span><span style="display:block;padding:0 1.25rem">create procedure leave_while(out num int)
+</span><span style="display:block;padding:0 1.25rem">begin
+</span><span style="display:block;padding:0 1.25rem">	declare avg_sal double;
+</span><span style="display:block;padding:0 1.25rem">	set num = 0;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	select avg(salary) into avg_sal from emps;
+</span><span style="display:block;padding:0 1.25rem">	sub_sal:while 1=1 do
+</span><span style="display:block;padding:0 1.25rem">			if avg_sal &lt;= 10000
+</span><span style="display:block;padding:0 1.25rem">				then leave sub_sal;
+</span><span style="display:block;padding:0 1.25rem">			end if;
+</span><span style="display:block;padding:0 1.25rem">			update emps set salary = salary * 0.9;
+</span><span style="display:block;padding:0 1.25rem">			set num = num + 1;
+</span><span style="display:block;padding:0 1.25rem">			select avg(salary) into avg_sal from emps;
+</span><span style="display:block;padding:0 1.25rem">	 end while sub_sal;
+</span><span style="display:block;padding:0 1.25rem">end $
+</span><span style="display:block;padding:0 1.25rem">delimiter ;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem"># 调用
+</span><span style="display:block;padding:0 1.25rem">call leave_while(@num);
+</span><span style="display:block;padding:0 1.25rem">select @num;</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h3 id="1638-跳转语句之-iterate" class="mt-10 mb-2 leading-7 text-xl title_3b154">16.3.8 跳转语句之 ITERATE<a class="link_3b154 header-anchor" aria-hidden="true" href="#1638-跳转语句之-iterate">#</a></h3>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">作用</p>
+</blockquote>
+<p class="my-4 leading-7">只能用在循环语句内，<strong class="font-semibold">表示重新开始循环，将执行顺序转到语句段的开头</strong>。</p>
+<p class="my-4 leading-7">相当于<code>continue</code>。</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">语法</p>
+</blockquote>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>ITERATE 标记名称;</span></span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">举例</p>
+</blockquote>
+<p class="my-4 leading-7"><code>例</code>定义局部变量num，初始值为0。循环结构中执行num + 1操作。如果num &lt; 10，则继续执行循环；如果num &gt; 15，则退出循环结构。</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span># 声明存储过程
+</span></span><span style="display:block;padding:0 1.25rem">delimiter $
+</span><span style="display:block;padding:0 1.25rem">create procedure test_iterate() 
+</span><span style="display:block;padding:0 1.25rem">begin
+</span><span style="display:block;padding:0 1.25rem">	declare num int default 0;
+</span><span style="display:block;padding:0 1.25rem">	loop_label:loop
+</span><span style="display:block;padding:0 1.25rem">		set num = num + 1;
+</span><span style="display:block;padding:0 1.25rem">		if num &lt; 10
+</span><span style="display:block;padding:0 1.25rem">			then iterate loop_label; # 结束当前循环，开始下一次循环
+</span><span style="display:block;padding:0 1.25rem">		elseif num &gt; 15
+</span><span style="display:block;padding:0 1.25rem">			then leave loop_label;
+</span><span style="display:block;padding:0 1.25rem">		end if;
+</span><span style="display:block;padding:0 1.25rem">		SELECT &#x27;学如逆水行舟，不进则退&#x27;;
+</span><span style="display:block;padding:0 1.25rem">	end loop loop_label;
+</span><span style="display:block;padding:0 1.25rem">end $
+</span><span style="display:block;padding:0 1.25rem">delimiter ;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem"># 调用
+</span><span style="display:block;padding:0 1.25rem">call test_iterate()</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h2 id="164-游标" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">16.4 游标<a class="link_3b154 header-anchor" aria-hidden="true" href="#164-游标">#</a></h2>
+<h3 id="1641-概述" class="mt-10 mb-2 leading-7 text-xl title_3b154">16.4.1 概述<a class="link_3b154 header-anchor" aria-hidden="true" href="#1641-概述">#</a></h3>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2"><strong class="font-semibold">作用</strong>：游标，让我们能够对结果集中的<em>每一条记录</em>进行定位，并对指向的记录中的数据进行操作的数据结构。<strong class="font-semibold">游标让 SQL 这种面向集合的语言有了面向过 程开发的能力。</strong></li>
+<li class="[&amp;:not(:first-child)]:mt-2">游标是一种临时的数据库对象，可以指向存储在数据库表中的数据行指针。这里游标<code>充当了指针</code>的作用。</li>
+<li class="[&amp;:not(:first-child)]:mt-2">游标可以在<code>存储过程</code>和<code>存储函数</code>中使用</li>
+</ul>
+<h3 id="1642-游标的使用" class="mt-10 mb-2 leading-7 text-xl title_3b154">16.4.2 游标的使用<a class="link_3b154 header-anchor" aria-hidden="true" href="#1642-游标的使用">#</a></h3>
+<p class="my-4 leading-7"><strong class="font-semibold">使用游标，一般需要经历如下4个步骤：</strong></p>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">声明游标：游标的声明必须<strong class="font-semibold">在变量声明之后、处理程序之前</strong>。</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>DECLARE 游标名 CURSOR FOR 查询语句;</span></span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">开启游标</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>OPEN 游标名;</span></span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">使用游标（从游标中获取数据）：</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>FETCH 游标名 INTO 变量名1 [, 变量名2, ...]</span></span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7"><strong class="font-semibold">游标的查询结果集中的字段，必须和INTO后的变量保持一致</strong></p>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">关闭游标</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>CLOSE 游标名;</span></span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+</li>
+</ul>
+<h3 id="1643-举例" class="mt-10 mb-2 leading-7 text-xl title_3b154">16.4.3 举例<a class="link_3b154 header-anchor" aria-hidden="true" href="#1643-举例">#</a></h3>
+<p class="my-4 leading-7"><code>例</code>创建存储过程“get_count_by_limit_total_salary()”，声明IN参数 limit_total_salary，DOUBLE类型；声明OUT参数total_count，INT类型。函数的功能可以实现累加薪资最高的几个员工的薪资值，直到薪资总和达到limit_total_salary参数的值，返回累加的人数给total_count。</p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span># 声明存储过程 
+</span></span><span style="display:block;padding:0 1.25rem">DELIMITER $
+</span><span style="display:block;padding:0 1.25rem">CREATE PROCEDURE get_count_by_limit_total_salary(IN limit_total_salary DOUBLE, OUT total_count INT)
+</span><span style="display:block;padding:0 1.25rem">BEGIN
+</span><span style="display:block;padding:0 1.25rem">	# 声明变量，存储薪资的和
+</span><span style="display:block;padding:0 1.25rem">	DECLARE sal_sum DOUBLE DEFAULT 0;
+</span><span style="display:block;padding:0 1.25rem">	# 声明变量，记录累加次数
+</span><span style="display:block;padding:0 1.25rem">	DECLARE emp_num INT DEFAULT 0;
+</span><span style="display:block;padding:0 1.25rem">	# 声明变量，记录游标指定行的salary信息
+</span><span style="display:block;padding:0 1.25rem">	DECLARE sal_tmp DOUBLE DEFAULT 0;
+</span><span style="display:block;padding:0 1.25rem">	# 声明游标
+</span><span style="display:block;padding:0 1.25rem">	DECLARE sal_cursor CURSOR FOR SELECT salary FROM emps ORDER BY salary DESC;
+</span><span style="display:block;padding:0 1.25rem">	# 打开游标
+</span><span style="display:block;padding:0 1.25rem">	OPEN sal_cursor;
+</span><span style="display:block;padding:0 1.25rem">	# 开始循环累加
+</span><span style="display:block;padding:0 1.25rem">	add_sal: WHILE sal_sum &lt; limit_total_salary DO 
+</span><span style="display:block;padding:0 1.25rem">		# 使用游标
+</span><span style="display:block;padding:0 1.25rem">		FETCH sal_cursor INTO sal_tmp;
+</span><span style="display:block;padding:0 1.25rem">		SET sal_sum := sal_sum + sal_tmp;
+</span><span style="display:block;padding:0 1.25rem">		SET emp_num := emp_num + 1;
+</span><span style="display:block;padding:0 1.25rem">	END WHILE add_sal;
+</span><span style="display:block;padding:0 1.25rem">	# 关闭游标
+</span><span style="display:block;padding:0 1.25rem">	CLOSE sal_cursor;
+</span><span style="display:block;padding:0 1.25rem">	# 给传出参数赋值
+</span><span style="display:block;padding:0 1.25rem">	SET total_count := emp_num;
+</span><span style="display:block;padding:0 1.25rem">END $
+</span><span style="display:block;padding:0 1.25rem">DELIMITER ;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem"># 调用
+</span><span style="display:block;padding:0 1.25rem">CALL get_count_by_limit_total_salary(200000, @count);
+</span><span style="display:block;padding:0 1.25rem">SELECT @count;</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h3 id="1644-游标的优缺点" class="mt-10 mb-2 leading-7 text-xl title_3b154">16.4.4 游标的优缺点<a class="link_3b154 header-anchor" aria-hidden="true" href="#1644-游标的优缺点">#</a></h3>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7"><strong class="font-semibold">优点</strong>：</p>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">允许<code>逐条读取</code>结果集中的数据</li>
+<li class="[&amp;:not(:first-child)]:mt-2">跟在应用层 面实现相同的功能相比，游标可以在存储程序中使用，效率高，程序也更加简洁。</li>
+</ul>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7"><strong class="font-semibold">缺点</strong>：</p>
+<p class="my-4 leading-7">在使用游标的过程中，会对数据行进行<code>加锁</code>。这样在<em>业务并发量大</em> 的时候，不仅会<!-- -->影响业务之间的效率<!-- -->，还会<!-- -->消耗系统资源<!-- --> ，<!-- -->造成内存不足<!-- -->，这是因为游标是在内存中进 行的处理</p>
+</li>
+</ul>
+<h2 id="165-综合例子" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">16.5 综合例子<a class="link_3b154 header-anchor" aria-hidden="true" href="#165-综合例子">#</a></h2>
+<p class="my-4 leading-7"><code>例</code>创建存储过程update_salary()，参数1为 IN 的INT型变量dept_id，表示部门id；参数2为 IN的INT型变量change_sal_count，表示要调整薪资的员工个数；参数3为OUT的VARCHAR(255)型变量result，记录程序是否正常结束。</p>
+<p class="my-4 leading-7">查询指定id部门的员工信息，按照salary升序排列，根据hire_date的情况，调整前change_sal_count个员工的薪资。涨薪比例如下：</p>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">1995(含1995)年之前入职的，涨薪120%；</li>
+<li class="[&amp;:not(:first-child)]:mt-2">1995~1998（含1998）年入职的，涨薪115%；</li>
+<li class="[&amp;:not(:first-child)]:mt-2">1998~2001（含2001）年入职的涨薪110%；</li>
+<li class="[&amp;:not(:first-child)]:mt-2">其他涨薪105%</li>
+</ul>
+<p class="my-4 leading-7">另外，关于参数3 result的值设计如下：</p>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">如果程序正常结束，result 值为 &quot;success&quot;；</li>
+<li class="[&amp;:not(:first-child)]:mt-2">当程序报错 “ERROR 1329 (02000)”时，result 值为 &quot;The change_sal_count is more than the number of employees of the current department&quot;</li>
+</ul>
+<p class="my-4 leading-7"><code>分析：</code>用到的知识点有：</p>
+<p class="my-4 leading-7">①创建存储过程；②分支结构；③循环结构；④游标；⑤定义条件与处理程序；⑥局部变量等</p>
+<p class="my-4 leading-7"><code>代码</code></p>
+<div class="language-mysql"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-mysql" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span># 创建存储过程
+</span></span><span style="display:block;padding:0 1.25rem">delimiter $
+</span><span style="display:block;padding:0 1.25rem">create procedure update_salary(in dept_id int, in change_sal_count int, out result varchar(255))
+</span><span style="display:block;padding:0 1.25rem">begin
+</span><span style="display:block;padding:0 1.25rem">	# 创建变量，记录员工的id
+</span><span style="display:block;padding:0 1.25rem">	declare emp_id int;
+</span><span style="display:block;padding:0 1.25rem">	# 创建变量，记录员工入职年份
+</span><span style="display:block;padding:0 1.25rem">	declare hire_year year;
+</span><span style="display:block;padding:0 1.25rem">	# 创建变量，记录员工涨薪幅度
+</span><span style="display:block;padding:0 1.25rem">	declare sal_rate double;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	# 定义条件
+</span><span style="display:block;padding:0 1.25rem">	declare index_out condition for 1329;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	# 声明游标
+</span><span style="display:block;padding:0 1.25rem">	declare emp_cursor cursor for 
+</span><span style="display:block;padding:0 1.25rem">		select employee_id, year(hire_date)
+</span><span style="display:block;padding:0 1.25rem">		from emps 
+</span><span style="display:block;padding:0 1.25rem">		where department_id = dept_id 
+</span><span style="display:block;padding:0 1.25rem">		order by salary asc;
+</span><span style="display:block;padding:0 1.25rem">		
+</span><span style="display:block;padding:0 1.25rem">	# 定义处理类型
+</span><span style="display:block;padding:0 1.25rem">	declare exit handler for index_out set result = &#x27;The change_sal_count is more than the number of employees of the current department&#x27;;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">	# 开启游标
+</span><span style="display:block;padding:0 1.25rem">	open emp_cursor;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	update_sal: while change_sal_count &gt; 0 do
+</span><span style="display:block;padding:0 1.25rem">		# 使用游标
+</span><span style="display:block;padding:0 1.25rem">		fetch emp_cursor into emp_id, hire_year;
+</span><span style="display:block;padding:0 1.25rem">		# 获取涨薪率
+</span><span style="display:block;padding:0 1.25rem">		case
+</span><span style="display:block;padding:0 1.25rem">			when hire_year &lt;= 1995 then set sal_rate = 1.2;
+</span><span style="display:block;padding:0 1.25rem">			when hire_year &lt;= 1998 then set sal_rate = 1.15;
+</span><span style="display:block;padding:0 1.25rem">			when hire_year &lt;= 2001 then set sal_rate = 1.10;
+</span><span style="display:block;padding:0 1.25rem">			else set sal_rate = 1.05;
+</span><span style="display:block;padding:0 1.25rem">		end case;
+</span><span style="display:block;padding:0 1.25rem">		# 涨薪
+</span><span style="display:block;padding:0 1.25rem">		update emps set salary = salary * sal_rate where employee_id = emp_id;
+</span><span style="display:block;padding:0 1.25rem">		# 更新迭代条件
+</span><span style="display:block;padding:0 1.25rem">		set change_sal_count = change_sal_count - 1;
+</span><span style="display:block;padding:0 1.25rem">	end while update_sal;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	# 关闭游标
+</span><span style="display:block;padding:0 1.25rem">	close emp_cursor;
+</span><span style="display:block;padding:0 1.25rem">	
+</span><span style="display:block;padding:0 1.25rem">	# 程序正常结束
+</span><span style="display:block;padding:0 1.25rem">	set result = &#x27;success&#x27;;
+</span><span style="display:block;padding:0 1.25rem">end $
+</span><span style="display:block;padding:0 1.25rem">delimiter ;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem">select employee_id, year(hire_date), salary
+</span><span style="display:block;padding:0 1.25rem">		from emps 
+</span><span style="display:block;padding:0 1.25rem">		where department_id = 90 
+</span><span style="display:block;padding:0 1.25rem">		order by salary asc;
+</span><span style="display:block;padding:0 1.25rem">
+</span><span style="display:block;padding:0 1.25rem"># 调用
+</span><span style="display:block;padding:0 1.25rem">call update_salary(90, 2, @result);
+</span><span style="display:block;padding:0 1.25rem">select @result;</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div><!--/$--></div><div class="rspress-doc-footer"><footer class="mt-8"><div class="xs:flex pb-5 px-2 justify-end items-center"></div><div class="flex flex-col"></div><div class="flex flex-col sm:flex-row sm:justify-around gap-4 pt-6"><div class="prev_e7091 flex flex-col"><a class="link_03735 pager-link_9b9a7 cursor-pointer" target="" href="/tang/mysql/15_存储过程与存储函数.html"><span class="desc_9b9a7">Previous Page</span><span class="title_9b9a7">15 存储过程与存储函数</span></a></div><div class="next_e7091 flex flex-col"><a class="link_03735 pager-link_9b9a7 next_9b9a7 cursor-pointer" target="" href="/tang/mysql/17_触发器.html"><span class="desc_9b9a7">Next Page</span><span class="title_9b9a7">17 触发器</span></a></div></div></footer></div></div></div><div class="aside-container_edeb4"><div><div class="flex flex-col"><div class="&lt;lg:hidden"><div id="aside-container" class="relative text-sm font-medium"><div class="leading-7 block text-sm font-semibold pl-3">ON THIS PAGE</div><nav class="mt-1"><ul class="relative"><li><a href="#161-变量" title="16.1 变量" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">16.1 变量</span></a></li><li><a href="#1611-系统变量" title="16.1.1 系统变量" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">16.1.1 系统变量</span></a></li><li><a href="#1612-用户变量" title="16.1.2 用户变量" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">16.1.2 用户变量</span></a></li><li><a href="#162-定义条件与处理程序" title="16.2 定义条件与处理程序" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">16.2 定义条件与处理程序</span></a></li><li><a href="#1621-定义条件" title="16.2.1 定义条件" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">16.2.1 定义条件</span></a></li><li><a href="#1622-定义处理程序" title="16.2.2 定义处理程序" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">16.2.2 定义处理程序</span></a></li><li><a href="#163-流程控制" title="16.3 流程控制" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">16.3 流程控制</span></a></li><li><a href="#1631-分支结构之-if" title="16.3.1 分支结构之 IF" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">16.3.1 分支结构之 IF</span></a></li><li><a href="#1632-分支结构之-case" title="16.3.2 分支结构之 CASE" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">16.3.2 分支结构之 CASE</span></a></li><li><a href="#1633-循环结构之-loop" title="16.3.3 循环结构之 LOOP" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">16.3.3 循环结构之 LOOP</span></a></li><li><a href="#1634-循环结构之-while" title="16.3.4 循环结构之 WHILE" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">16.3.4 循环结构之 WHILE</span></a></li><li><a href="#1635-循环结构之-repeat" title="16.3.5 循环结构之 REPEAT" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">16.3.5 循环结构之 REPEAT</span></a></li><li><a href="#1636-loopwhilerepeat的对比" title="16.3.6 LOOP、WHILE、REPEAT的对比" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">16.3.6 LOOP、WHILE、REPEAT的对比</span></a></li><li><a href="#1637-跳转语句之-leave" title="16.3.7 跳转语句之 LEAVE" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">16.3.7 跳转语句之 LEAVE</span></a></li><li><a href="#1638-跳转语句之-iterate" title="16.3.8 跳转语句之 ITERATE" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">16.3.8 跳转语句之 ITERATE</span></a></li><li><a href="#164-游标" title="16.4 游标" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">16.4 游标</span></a></li><li><a href="#1641-概述" title="16.4.1 概述" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">16.4.1 概述</span></a></li><li><a href="#1642-游标的使用" title="16.4.2 游标的使用" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">16.4.2 游标的使用</span></a></li><li><a href="#1643-举例" title="16.4.3 举例" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">16.4.3 举例</span></a></li><li><a href="#1644-游标的优缺点" title="16.4.4 游标的优缺点" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">16.4.4 游标的优缺点</span></a></li><li><a href="#165-综合例子" title="16.5 综合例子" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">16.5 综合例子</span></a></li></ul></nav></div></div></div></div></div></div></div></section></div></div>
+  <div id="search-container"></div>
+</body>
+
+</html>

@@ -1,0 +1,1 @@
+(self.webpackChunkmy_doc=self.webpackChunkmy_doc||[]).push([["4507"],{56219:function(){let o={foo:"foo"};function e(o){if("object"!=typeof o||null===o)return o;Object.keys(o).map(t=>{(function(o,t,n){e(n),Object.defineProperty(o,t,{get:()=>(console.log("get:::"+t),n),set(o){o!=n&&(e(o),console.log("set:::"+t+"="+o),n=o)}})})(o,t,o[t])})}e(o),o.foo,o.foo="123"}}]);

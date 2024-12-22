@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Rspress v1.38.0">
+  <title data-rh="true">10.  服务异步通讯RabbitMQ - wenatie</title>
+<script>{;const saved = localStorage.getItem('rspress-theme-appearance');const preferDark = window.matchMedia('(prefers-color-scheme: dark)').matches;const isDark = !saved || saved === 'auto' ? preferDark : saved === 'dark';document.documentElement.classList.toggle('dark', isDark);document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';}</script><link rel="icon" href="/rspress-icon.png"><script defer src="/static/js/styles.1737145b.js"></script><script defer src="/static/js/lib-react.bfe73f81.js"></script><script defer src="/static/js/lib-router.aa18f61d.js"></script><script defer src="/static/js/index.df03ac1d.js"></script><link href="/static/css/styles.c26b7a64.css" rel="stylesheet"></head>
+
+<body >
+  <div id="root"><div><div class="navContainer_f6cde rspress-nav px-6 " style="position:sticky"><div class="container_f6cde flex justify-between items-center h-full"><div class="navBarTitle_f6cde"><a class="link_03735 flex items-center w-full h-full text-base font-semibold transition-opacity duration-300 hover:opacity-60 cursor-pointer" target="" href="/index.html"><span>wenatie</span></a></div><div class="flex flex-1 justify-end items-center"><div class="rightNav_f6cde"><div class="flex sm:flex-1 items-center sm:pl-4 sm:pr-2"><div class="rspress-nav-search-button navSearchButton_6e282"><button><svg width="18" height="18" viewBox="0 0 32 32"><path fill="var(--rp-c-gray)" d="m29 27.586-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L27.586 29ZM4 13a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9Z"></path></svg><p class="searchWord_6e282">Search Docs</p><div style="opacity:0"><span></span><span>K</span></div></button></div><div class="mobileNavSearchButton_6e282"><svg width="24" height="24" viewBox="0 0 32 32"><path fill="var(--rp-c-gray)" d="m29 27.586-7.552-7.552a11.018 11.018 0 1 0-1.414 1.414L27.586 29ZM4 13a9 9 0 1 1 9 9 9.01 9.01 0 0 1-9-9Z"></path></svg></div></div><div class="rspress-nav-menu menu h-14"><div class="mx-3 last:mr-0"><div class="relative flex-center h-14"><button class="rspress-nav-menu-group-button flex-center items-center font-medium text-sm text-text-1 hover:text-text-2 transition-colors duration-200"><span class="text-sm font-medium flex" style="margin-right:2px">小唐学习笔记</span><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div class="rspress-nav-menu-group-content absolute mx-0.8 transition-opacity duration-300" style="opacity:0;visibility:hidden;right:0;top:52px"><div class="p-3 pr-2 w-full h-full max-h-100vh whitespace-nowrap" style="box-shadow:var(--rp-shadow-3);z-index:100;border:1px solid var(--rp-c-divider-light);border-radius:var(--rp-radius-large);background:var(--rp-c-bg)"><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/gitlab/gitlab-error.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>gitlab</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/java2/00_前言.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>java</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/mysql/01_MySQL概述.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>mysql</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/docker/Docker.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>docker</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/k8s/学习资料/command.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>k8s</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/Elasticsearch/01_Elasticsearch概述.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>Elasticsearch</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/Prometheus/1.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>Prometheus</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/Python/1.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>Python</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/Vue/1.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>Vue</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/server/CentOS7root账号免密登录.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>服务器环境安装</span></div></div></a></div></div><div><div class="rounded-2xl my-1 flex" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><span class="text-brand">微服务</span></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/项目上线/xiaochengxu.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>项目上线</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/tang/IoTPlatform/jetlinks项目初体验.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>物联网项目</span></div></div></a></div></div></div></div></div></div><div class="mx-3 last:mr-0"><div class="relative flex-center h-14"><button class="rspress-nav-menu-group-button flex-center items-center font-medium text-sm text-text-1 hover:text-text-2 transition-colors duration-200"><span class="text-sm font-medium flex" style="margin-right:2px">前端基础</span><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div class="rspress-nav-menu-group-content absolute mx-0.8 transition-opacity duration-300" style="opacity:0;visibility:hidden;right:0;top:52px"><div class="p-3 pr-2 w-full h-full max-h-100vh whitespace-nowrap" style="box-shadow:var(--rp-shadow-3);z-index:100;border:1px solid var(--rp-c-divider-light);border-radius:var(--rp-radius-large);background:var(--rp-c-bg)"><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/JavaScript/es6/es6-1.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>ES6入门</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/JavaScript/youdontknowjs/part1.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>你不知道的Javascript</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/JavaScript/design/index.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>设计模式</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/JavaScript/typescript/ts-basic.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>typescript</span></div></div></a></div></div></div></div></div></div><div class="mx-3 last:mr-0"><div class="relative flex-center h-14"><button class="rspress-nav-menu-group-button flex-center items-center font-medium text-sm text-text-1 hover:text-text-2 transition-colors duration-200"><span class="text-sm font-medium flex" style="margin-right:2px">框架</span><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div class="rspress-nav-menu-group-content absolute mx-0.8 transition-opacity duration-300" style="opacity:0;visibility:hidden;right:0;top:52px"><div class="p-3 pr-2 w-full h-full max-h-100vh whitespace-nowrap" style="box-shadow:var(--rp-shadow-3);z-index:100;border:1px solid var(--rp-c-divider-light);border-radius:var(--rp-radius-large);background:var(--rp-c-bg)"><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/formwork/vue/vueyuanli.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>vue2</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/formwork/vue3/reactive/part1.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>vue3</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/formwork/harmony/part1.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>鸿蒙</span></div></div></a></div></div></div></div></div></div><div class="mx-3 last:mr-0"><div class="relative flex-center h-14"><button class="rspress-nav-menu-group-button flex-center items-center font-medium text-sm text-text-1 hover:text-text-2 transition-colors duration-200"><span class="text-sm font-medium flex" style="margin-right:2px">计算机基础</span><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div class="rspress-nav-menu-group-content absolute mx-0.8 transition-opacity duration-300" style="opacity:0;visibility:hidden;right:0;top:52px"><div class="p-3 pr-2 w-full h-full max-h-100vh whitespace-nowrap" style="box-shadow:var(--rp-shadow-3);z-index:100;border:1px solid var(--rp-c-divider-light);border-radius:var(--rp-radius-large);background:var(--rp-c-bg)"><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/end/c/data-contruction/part1.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>数据结构（严蔚敏）</span></div></div></a></div></div></div></div></div></div><div class="mx-3 last:mr-0"><div class="relative flex-center h-14"><button class="rspress-nav-menu-group-button flex-center items-center font-medium text-sm text-text-1 hover:text-text-2 transition-colors duration-200"><span class="text-sm font-medium flex" style="margin-right:2px">随笔笔记</span><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div class="rspress-nav-menu-group-content absolute mx-0.8 transition-opacity duration-300" style="opacity:0;visibility:hidden;right:0;top:52px"><div class="p-3 pr-2 w-full h-full max-h-100vh whitespace-nowrap" style="box-shadow:var(--rp-shadow-3);z-index:100;border:1px solid var(--rp-c-divider-light);border-radius:var(--rp-radius-large);background:var(--rp-c-bg)"><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/notes/JS/hwdj.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>JS相关</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/notes/CSS/css-selector.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>CSS相关</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/notes/browser/xmlhttprequest.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>浏览器相关</span></div></div></a></div></div><div><div class="font-medium my-1"><a class="link_03735  cursor-pointer" target="" href="/notes/node/node.html"><div class="rounded-2xl hover:bg-mute" style="padding:0.4rem 1.5rem 0.4rem 0.75rem"><div class="flex"><span>node相关</span></div></div></a></div></div></div></div></div></div></div><div class="flex-center flex-row"><div class="mx-2"><div class="md:mr-2 rspress-nav-appearance"><div class="p-1 border border-solid border-gray-300 text-gray-400  cursor-pointer rounded-md hover:border-gray-600 hover:text-gray-600 dark:hover:border-gray-200 dark:hover:text-gray-200 transition-all duration-300 w-7 h-7"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" class="dark:hidden" width="18" height="18" fill="currentColor"><path d="M12 18c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6zm0-10c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zM12 4c-.6 0-1-.4-1-1V1c0-.6.4-1 1-1s1 .4 1 1v2c0 .6-.4 1-1 1zM12 24c-.6 0-1-.4-1-1v-2c0-.6.4-1 1-1s1 .4 1 1v2c0 .6-.4 1-1 1zM5.6 6.6c-.3 0-.5-.1-.7-.3L3.5 4.9c-.4-.4-.4-1 0-1.4s1-.4 1.4 0l1.4 1.4c.4.4.4 1 0 1.4-.1.2-.4.3-.7.3zM19.8 20.8c-.3 0-.5-.1-.7-.3l-1.4-1.4c-.4-.4-.4-1 0-1.4s1-.4 1.4 0l1.4 1.4c.4.4.4 1 0 1.4-.2.2-.5.3-.7.3zM3 13H1c-.6 0-1-.4-1-1s.4-1 1-1h2c.6 0 1 .4 1 1s-.4 1-1 1zM23 13h-2c-.6 0-1-.4-1-1s.4-1 1-1h2c.6 0 1 .4 1 1s-.4 1-1 1zM4.2 20.8c-.3 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.4-1.4c.4-.4 1-.4 1.4 0s.4 1 0 1.4l-1.4 1.4c-.2.2-.4.3-.7.3zM18.4 6.6c-.3 0-.5-.1-.7-.3-.4-.4-.4-1 0-1.4l1.4-1.4c.4-.4 1-.4 1.4 0s.4 1 0 1.4l-1.4 1.4c-.2.2-.5.3-.7.3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" viewBox="0 0 24 24" class="hidden dark:block" width="18" height="18" fill="currentColor"><path d="M12.1 22h-.9c-5.5-.5-9.5-5.4-9-10.9.4-4.8 4.2-8.6 9-9 .4 0 .8.2 1 .5.2.3.2.8-.1 1.1-2 2.7-1.4 6.4 1.3 8.4 2.1 1.6 5 1.6 7.1 0 .3-.2.7-.3 1.1-.1.3.2.5.6.5 1-.2 2.7-1.5 5.1-3.6 6.8-1.9 1.4-4.1 2.2-6.4 2.2zM9.3 4.4c-2.9 1-5 3.6-5.2 6.8-.4 4.4 2.8 8.3 7.2 8.7 2.1.2 4.2-.4 5.8-1.8 1.1-.9 1.9-2.1 2.4-3.4-2.5.9-5.3.5-7.5-1.1-2.8-2.2-3.9-5.9-2.7-9.2z"></path></svg></div></div></div></div></div><div class="mobileNavMenu_f6cde"><div class="navScreen_457e8 " id="navScreen"><div class="container_457e8"><div class="navMenu_457e8"><div class="navMenuItem_457e8 w-full"><div class="mx-3 last:mr-0"><div class=" navScreenMenuGroup_457e8 relative"><button class="button_457e8"><span class="buttonSpan_457e8">小唐学习笔记</span><svg width="1em" height="1em" viewBox="0 0 32 32" class=" down_457e8 "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div><div class="items_457e8"><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/gitlab/gitlab-error.html"><div><div class="flex justify-center"><span>gitlab</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/java2/00_前言.html"><div><div class="flex justify-center"><span>java</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/mysql/01_MySQL概述.html"><div><div class="flex justify-center"><span>mysql</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/docker/Docker.html"><div><div class="flex justify-center"><span>docker</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/k8s/学习资料/command.html"><div><div class="flex justify-center"><span>k8s</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/Elasticsearch/01_Elasticsearch概述.html"><div><div class="flex justify-center"><span>Elasticsearch</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/Prometheus/1.html"><div><div class="flex justify-center"><span>Prometheus</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/Python/1.html"><div><div class="flex justify-center"><span>Python</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/Vue/1.html"><div><div class="flex justify-center"><span>Vue</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/server/CentOS7root账号免密登录.html"><div><div class="flex justify-center"><span>服务器环境安装</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/mservice/2.html"><div><div class="flex justify-center"><span>微服务</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/项目上线/xiaochengxu.html"><div><div class="flex justify-center"><span>项目上线</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/tang/IoTPlatform/jetlinks项目初体验.html"><div><div class="flex justify-center"><span>物联网项目</span></div></div></a></div></div></div></div></div></div></div><div class="navMenuItem_457e8 w-full"><div class="mx-3 last:mr-0"><div class=" navScreenMenuGroup_457e8 relative"><button class="button_457e8"><span class="buttonSpan_457e8">前端基础</span><svg width="1em" height="1em" viewBox="0 0 32 32" class=" down_457e8 "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div><div class="items_457e8"><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/JavaScript/es6/es6-1.html"><div><div class="flex justify-center"><span>ES6入门</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/JavaScript/youdontknowjs/part1.html"><div><div class="flex justify-center"><span>你不知道的Javascript</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/JavaScript/design/index.html"><div><div class="flex justify-center"><span>设计模式</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/JavaScript/typescript/ts-basic.html"><div><div class="flex justify-center"><span>typescript</span></div></div></a></div></div></div></div></div></div></div><div class="navMenuItem_457e8 w-full"><div class="mx-3 last:mr-0"><div class=" navScreenMenuGroup_457e8 relative"><button class="button_457e8"><span class="buttonSpan_457e8">框架</span><svg width="1em" height="1em" viewBox="0 0 32 32" class=" down_457e8 "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div><div class="items_457e8"><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/formwork/vue/vueyuanli.html"><div><div class="flex justify-center"><span>vue2</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/formwork/vue3/reactive/part1.html"><div><div class="flex justify-center"><span>vue3</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/formwork/harmony/part1.html"><div><div class="flex justify-center"><span>鸿蒙</span></div></div></a></div></div></div></div></div></div></div><div class="navMenuItem_457e8 w-full"><div class="mx-3 last:mr-0"><div class=" navScreenMenuGroup_457e8 relative"><button class="button_457e8"><span class="buttonSpan_457e8">计算机基础</span><svg width="1em" height="1em" viewBox="0 0 32 32" class=" down_457e8 "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div><div class="items_457e8"><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/end/c/data-contruction/part1.html"><div><div class="flex justify-center"><span>数据结构（严蔚敏）</span></div></div></a></div></div></div></div></div></div></div><div class="navMenuItem_457e8 w-full"><div class="mx-3 last:mr-0"><div class=" navScreenMenuGroup_457e8 relative"><button class="button_457e8"><span class="buttonSpan_457e8">随笔笔记</span><svg width="1em" height="1em" viewBox="0 0 32 32" class=" down_457e8 "><path fill="currentColor" d="M16 22 6 12l1.4-1.4 8.6 8.6 8.6-8.6L26 12z"></path></svg></button><div><div class="items_457e8"><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/notes/JS/hwdj.html"><div><div class="flex justify-center"><span>JS相关</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/notes/CSS/css-selector.html"><div><div class="flex justify-center"><span>CSS相关</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/notes/browser/xmlhttprequest.html"><div><div class="flex justify-center"><span>浏览器相关</span></div></div></a></div></div><div><div class="py-1 font-medium"><a class="link_03735  cursor-pointer" target="" href="/notes/node/node.html"><div><div class="flex justify-center"><span>node相关</span></div></div></a></div></div></div></div></div></div></div></div><div class="flex-center flex-col gap-2"><div class="mt-2 navAppearance_457e8 flex justify-center"></div></div></div></div><button aria-label="mobile hamburger" class=" navHamburger_e7b06 text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="currentColor"><circle cx="8" cy="16" r="2" fill="currentColor"></circle><circle cx="16" cy="16" r="2" fill="currentColor"></circle><circle cx="24" cy="16" r="2" fill="currentColor"></circle></svg></button></div></div></div></div><section><div class="docLayout_edeb4 pt-0"><div class="rspress-sidebar-menu"><button class="flex-center mr-auto"><div class="text-md mr-2"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M4 6h24v2H4zm0 18h24v2H4zm0-12h24v2H4zm0 6h24v2H4z"></path></svg></div><span class="text-sm">Menu</span></button><button class="flex-center ml-auto"><span class="text-sm">ON THIS PAGE</span><div class="text-md mr-2" style="transform:rotate(0deg);transition:transform 0.2s ease-out;margin-top:2px"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></button><div class="rspress-local-toc-container "><ul><li><a href="#11-分布式架构" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">1.1 分布式架构</span></a></li><li><a href="#12-微服务" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">1.2 微服务</span></a></li><li><a href="#13-springcloud" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">1.3 SpringCloud</span></a></li><li><a href="#21-服务拆分注意事项" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">2.1 服务拆分注意事项</span></a></li><li><a href="#22-服务调用关系" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">2.2 服务调用关系</span></a></li><li><a href="#23-eureka注册中心" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">2.3 Eureka注册中心</span></a></li><li><a href="#24-ribbon负载均衡" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">2.4 Ribbon负载均衡</span></a></li><li><a href="#25-nacos注册中心" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">2.5 Nacos注册中心</span></a></li><li><a href="#71-feign替代resttemplate" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">7.1 Feign替代RestTemplate</span></a></li><li><a href="#72-自定义配置" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">7.2 自定义配置</span></a></li><li><a href="#73-feign使用优化" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">7.3 Feign使用优化</span></a></li><li><a href="#74-最佳实践" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">7.4 最佳实践</span></a></li><li><a href="#81-为什么需要网关" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">8.1 为什么需要网关</span></a></li><li><a href="#82-gateway快速入门" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">8.2 gateway快速入门</span></a></li><li><a href="#83-断言工厂" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">8.3 断言工厂</span></a></li><li><a href="#84-过滤器工厂" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">8.4 过滤器工厂</span></a></li><li><a href="#841-路由过滤器gatewayfilter" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">8.4.1 路由过滤器GatewayFilter</span></a></li><li><a href="#842-路由过滤器工厂" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">8.4.2 路由过滤器工厂</span></a></li><li><a href="#85-全局过滤器globalfilter" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">8.5 全局过滤器GlobalFilter</span></a></li><li><a href="#86-过滤器执行顺序" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">8.6 过滤器执行顺序</span></a></li><li><a href="#87-跨域问题" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">8.7 跨域问题</span></a></li><li><a href="#91-初识docker" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">9.1 初识Docker</span></a></li><li><a href="#911-概念" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">9.1.1 概念</span></a></li><li><a href="#912-docker与虚拟机的区别" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">9.1.2 Docker与虚拟机的区别</span></a></li><li><a href="#913-docker架构" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">9.1.3 Docker架构</span></a></li><li><a href="#92-数据卷" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">9.2 数据卷</span></a></li><li><a href="#93-目录挂载" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">9.3 目录挂载</span></a></li><li><a href="#94-镜像" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">9.4 镜像</span></a></li><li><a href="#95-dockercompose" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">9.5 DockerCompose</span></a></li><li><a href="#101-初始mq" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">10.1 初始MQ</span></a></li><li><a href="#1011-同步通讯" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">10.1.1 同步通讯</span></a></li><li><a href="#1012-异步通讯" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">10.1.2 异步通讯</span></a></li><li><a href="#1013-mq常见框架" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">10.1.3 MQ常见框架</span></a></li><li><a href="#102-rabbitmq快速入门" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">10.2 RabbitMQ快速入门</span></a></li><li><a href="#1021-概述" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">10.2.1 概述</span></a></li><li><a href="#10211-单机部署mq" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:24px"><span class="rspress-toc-link-text block">10.2.1.1 单机部署MQ</span></a></li><li><a href="#1022-rabbitmq概念和结构" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">10.2.2 RabbitMQ概念和结构</span></a></li><li><a href="#103-常见消息模型" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">10.3 常见消息模型</span></a></li><li><a href="#104-springamqp" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:0"><span class="rspress-toc-link-text block">10.4 SpringAMQP</span></a></li><li><a href="#1041-概念" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">10.4.1 概念</span></a></li><li><a href="#1042-案例" class="rspress-toc-link sm:text-normal text-sm" style="margin-left:12px"><span class="rspress-toc-link-text block">10.4.2 案例</span></a></li></ul></div></div><aside class="sidebar_71eca rspress-sidebar "><div class="navTitleMask_71eca"><div class="navBarTitle_f6cde"><a class="link_03735 flex items-center w-full h-full text-base font-semibold transition-opacity duration-300 hover:opacity-60 cursor-pointer" target="" href="/index.html"><span>wenatie</span></a></div></div><div class="rspress-scrollbar sidebarContent_71eca"><nav class="pb-2"><section class="rspress-sidebar-section mt-0.5 block" style="margin-left:0"><div class="rspress-sidebar-collapse flex justify-between items-center menuItem_71eca" style="border-radius:0 var(--rp-radius) var(--rp-radius) 0;cursor:pointer"><h2 class="py-2 px-3 text-sm font-medium flex" style="font-size:14px;padding-left:24px;font-weight:bold"><span class="flex-center" style="font-size:14px">微服务学习</span></h2><div class="collapseContainer_71eca p-2 rounded-xl"><div style="cursor:pointer;transition:transform 0.2s ease-out;transform:rotate(90deg)"><svg width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M22 16 12 26l-1.4-1.4 8.6-8.6-8.6-8.6L12 6z"></path></svg></div></div></div><div class="transition-all duration-300 ease-in-out" style="overflow:hidden"><div class="rspress-sidebar-group transition-opacity duration-500 ease-in-out" style="opacity:1;margin-left:12px"><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mservice/2.html"><div class="menuItemActive_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>10.  服务异步通讯RabbitMQ</span></div></a></div><div class="rspress-sidebar-item"><a class="link_03735 menuLink_71eca cursor-pointer" target="" href="/tang/mservice/1.html"><div class="menuItem_71eca mt-0.5 py-2 px-3 font-medium flex" style="font-size:13px;margin-left:18px;border-radius:0 var(--rp-radius) var(--rp-radius) 0"><span>2.云平台部署Nacos</span></div></a></div></div></div></section></nav></div></aside><div class="content_edeb4 rspress-doc-container flex flex-shrink-0 mx-auto"><div class="w-full flex-1"><div><div class="rspress-doc"><!--$--><h1 id="微服务学习" class="text-3xl mb-10 leading-10 tracking-tight title_3b154">微服务学习<a class="link_3b154 header-anchor" aria-hidden="true" href="#微服务学习">#</a></h1>
+<h1 id="1认识微服务" class="text-3xl mb-10 leading-10 tracking-tight title_3b154">1.认识微服务<a class="link_3b154 header-anchor" aria-hidden="true" href="#1认识微服务">#</a></h1>
+<h2 id="11-分布式架构" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">1.1 分布式架构<a class="link_3b154 header-anchor" aria-hidden="true" href="#11-分布式架构">#</a></h2>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">定义</p>
+</blockquote>
+<p class="my-4 leading-7">根据业务功能对系统进行拆分，每个业务模块的作为独立项目开发，成为一个服务。</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">优点</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">降低服务耦合</li>
+<li class="[&amp;:not(:first-child)]:mt-2">有利于服务扩展</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">分布式架构要考虑的问题</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">服务拆分粒度？</li>
+<li class="[&amp;:not(:first-child)]:mt-2">服务集群地址如何维护？</li>
+<li class="[&amp;:not(:first-child)]:mt-2">服务之间如何实现远程调用？</li>
+<li class="[&amp;:not(:first-child)]:mt-2">服务健康状态如何感知？</li>
+</ul>
+<h2 id="12-微服务" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">1.2 微服务<a class="link_3b154 header-anchor" aria-hidden="true" href="#12-微服务">#</a></h2>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">定义</p>
+</blockquote>
+<p class="my-4 leading-7">微服务是一种经过良好架构设计的<strong class="font-semibold">分布式</strong>架构方案。</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">特征</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">==单一职责==：微服务拆分粒度更小，每一个服务对应唯一的业务能力，做到单一职责，避免业务重复开发</li>
+<li class="[&amp;:not(:first-child)]:mt-2">==面向对象==：微服务对外暴露接口</li>
+<li class="[&amp;:not(:first-child)]:mt-2">==自治==：团队独立、技术独立、数据独立、部署独立</li>
+<li class="[&amp;:not(:first-child)]:mt-2">==隔离性强==：服务调用做好隔离、容错、降级，避免出现隔离问题</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">微服务技术对比</p>
+</blockquote>
+<table class="block border-collapse text-base my-5 overflow-x-auto leading-7 border-gray-light-3 dark:border-divider">
+<thead>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<th class="border border-solid px-4 py-2 text-text-1 text-base font-semibold border-gray-light-3 dark:border-divider"></th>
+<th class="border border-solid px-4 py-2 text-text-1 text-base font-semibold border-gray-light-3 dark:border-divider">Dubbo</th>
+<th class="border border-solid px-4 py-2 text-text-1 text-base font-semibold border-gray-light-3 dark:border-divider">SpringCloud</th>
+<th class="border border-solid px-4 py-2 text-text-1 text-base font-semibold border-gray-light-3 dark:border-divider">SpringCloudAlibaba</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">注册中心</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">zookeeper、Redis</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">Eureka、Consul</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">Nacos、Eureka</td>
+</tr>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">服务远程调用</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">Dobbo协议</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">Feign（http协议）</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">Dubbo、Feign</td>
+</tr>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">配置中心</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">无</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">SpringCloudConfig</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">SpringCloudConfig、Nacos</td>
+</tr>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">服务网关</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">无</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">SpringCloudGateway、Zuul</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">SpringCloudGateway、Zuul</td>
+</tr>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">服务监控和保护</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">dubbo-admin，功能弱</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">Hystrix</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">Sentinel</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-springcloud" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">1.3 SpringCloud<a class="link_3b154 header-anchor" aria-hidden="true" href="#13-springcloud">#</a></h2>
+<p class="my-4 leading-7">目前使用最广泛的微服务架构。</p>
+<h1 id="2服务拆分及远程调用" class="text-3xl mb-10 leading-10 tracking-tight title_3b154">2.服务拆分及远程调用<a class="link_3b154 header-anchor" aria-hidden="true" href="#2服务拆分及远程调用">#</a></h1>
+<h2 id="21-服务拆分注意事项" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">2.1 服务拆分注意事项<a class="link_3b154 header-anchor" aria-hidden="true" href="#21-服务拆分注意事项">#</a></h2>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">不同微服务，不要重复开发相同业务。</li>
+<li class="[&amp;:not(:first-child)]:mt-2">微服务数据独立，不要访问其他微服务的数据库。</li>
+<li class="[&amp;:not(:first-child)]:mt-2">微服务可以将自己的业务暴露为接口，供其他服务使用。</li>
+</ul>
+<h2 id="22-服务调用关系" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">2.2 服务调用关系<a class="link_3b154 header-anchor" aria-hidden="true" href="#22-服务调用关系">#</a></h2>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">==服务提供者==：一次业务中，被其他微服务调用的服务。</p>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">==服务消费者==：一次业务中，低啊用其他微服务的服务。</p>
+<p class="my-4 leading-7">==<strong class="font-semibold">提供者与消费者的角色是相对而言的</strong>==：一个服务既可以是消费者，又可以是提供者</p>
+</li>
+</ul>
+<h2 id="23-eureka注册中心" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">2.3 Eureka注册中心<a class="link_3b154 header-anchor" aria-hidden="true" href="#23-eureka注册中心">#</a></h2>
+<p class="my-4 leading-7">Eureka架构中,微服务角色有两类:</p>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">EurekaServer：服务端，注册中心</p>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">作用：记录服务信息，监控客户端心跳</li>
+</ul>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">EurekaClient：客户端</p>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">Provider：服务提供者<!-- -->
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">启动时，注册自己的信息到EurekaServer</li>
+<li class="[&amp;:not(:first-child)]:mt-2">每隔30s向EurekaServer发送心跳</li>
+</ul>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">Consumer：服务消费者<!-- -->
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">根据服务名称从EurekaServer拉取服务列表</li>
+<li class="[&amp;:not(:first-child)]:mt-2">基于服务列表做负载均衡，选中一个微服务后发起调用。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="24-ribbon负载均衡" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">2.4 Ribbon负载均衡<a class="link_3b154 header-anchor" aria-hidden="true" href="#24-ribbon负载均衡">#</a></h2>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">Ribbon负载均衡流程</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220127171558841.3511cc81.png" alt="image-20220127171558841"/></p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">负载均衡策略</p>
+</blockquote>
+<p class="my-4 leading-7">==Ribbon的负载均衡规则是一个叫IRule的接口来定义的，每一个子接口都是一种规则。==</p>
+<p class="my-4 leading-7"><img src="/static/image/image-20220127171820634.2808147c.png" alt="image-20220127171820634"/></p>
+<table class="block border-collapse text-base my-5 overflow-x-auto leading-7 border-gray-light-3 dark:border-divider">
+<thead>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<th class="border border-solid px-4 py-2 text-text-1 text-base font-semibold border-gray-light-3 dark:border-divider">内置负载均衡规则类</th>
+<th class="border border-solid px-4 py-2 text-text-1 text-base font-semibold border-gray-light-3 dark:border-divider">规则描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">RoundRobinRule</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">轮询。Ribbon默认的负载均衡。</td>
+</tr>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">AvailabilityFilteringRule</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">对以下两种服务器忽略: <!-- -->1.“短路”的服务器。默认情况下，如果一台服务器3次连接失败，就会被设置为“短路”状态。短路状态将持续30s，如果再次连接失败，短路状态持续时间几何级增加。<!-- --> 2.并发数过高的服务器。可以由<code>&lt;clientName&gt;.&lt;clientConfigNameSpace&gt;.ActiveConnectionsLimit</code>配置。</td>
+</tr>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">WeightedResponseTimeRule</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">为每一个服务器赋予一个权重值。服务器响应时间越长，其权重值越小。这个规则会随机选择服务器，权重值会影响服务器的选择。</td>
+</tr>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">ZoneAvoidanceRule</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">以区域可用的服务器为基础进行服务器的选择。使用Zone对服务器进行分类，Zone可以理解为一个机房、一个机架等。而后再对Zone内的多个服务做轮询。</td>
+</tr>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">BestAvailableRule</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">忽略短路服务器，并选择并发数较低的服务器。</td>
+</tr>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">RandomRule</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">随机选择一个可用的服务器。</td>
+</tr>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">RetryRule</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">重试机制的选择逻辑。</td>
+</tr>
+<tr class="border border-solid transition-colors duration-500 even:bg-soft border-gray-light-3 dark:border-divider">
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">RandomRule</td>
+<td class="border border-solid px-4 py-2 border-gray-light-3 dark:border-divider">随机选择。</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">负载均衡两种配置方式</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">在消费者服务的启动类里注入IRule</p>
+<div class="language-java"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-java" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span class="token annotation" style="color:var(--code-token-punctuation)">@Bean</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span></span><span class="token" style="color:var(--code-token-keyword)">public</span><span> </span><span class="token class-name">IRule</span><span> </span><span class="token" style="color:var(--code-token-function)">randomRule</span><span class="token" style="color:var(--code-token-punctuation)">(</span><span class="token" style="color:var(--code-token-punctuation)">)</span><span> </span><span class="token" style="color:var(--code-token-punctuation)">{</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>    </span><span class="token" style="color:var(--code-token-keyword)">return</span><span> </span><span class="token" style="color:var(--code-token-keyword)">new</span><span> </span><span class="token class-name">RendomRule</span><span class="token" style="color:var(--code-token-punctuation)">(</span><span class="token" style="color:var(--code-token-punctuation)">)</span><span class="token" style="color:var(--code-token-punctuation)">;</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span></span><span class="token" style="color:var(--code-token-punctuation)">}</span></span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">在消费者服务的yaml文件里添加规则</p>
+<div class="language-yaml"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-yaml" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span class="token atrule" style="color:var(--code-token-variable)">userservice</span><span class="token" style="color:var(--code-token-punctuation)">:</span><span> </span><span class="token" style="color:var(--code-token-comment)"># 服务提供者的服务名</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>    </span><span class="token atrule" style="color:var(--code-token-variable)">ribbon</span><span class="token" style="color:var(--code-token-punctuation)">:</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>       </span><span class="token atrule" style="color:var(--code-token-variable)">NFLoadBalancerRuleClassName</span><span class="token" style="color:var(--code-token-punctuation)">:</span><span> com.netflix.loadbalancer.RandomRule </span><span class="token" style="color:var(--code-token-comment)"># 负载均衡规则</span></span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+</li>
+</ul>
+<p class="my-4 leading-7">==以上二者的区别==：</p>
+<p class="my-4 leading-7">​	第一种是所有服务的负载均衡策略都是RandomRule；第二种是只有指定服务名（userservice）的服务的负载均衡策略是RandomRule。</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">Ribbon 策略--饥饿加载</p>
+</blockquote>
+<p class="my-4 leading-7">Ribbon默认使用的是<strong class="font-semibold">懒加载</strong>。</p>
+<p class="my-4 leading-7">==开启饥饿加载==</p>
+<div class="language-yaml"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-yaml" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span class="token atrule" style="color:var(--code-token-variable)">ribbon</span><span class="token" style="color:var(--code-token-punctuation)">:</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>  </span><span class="token atrule" style="color:var(--code-token-variable)">eager-load</span><span class="token" style="color:var(--code-token-punctuation)">:</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>      </span><span class="token atrule" style="color:var(--code-token-variable)">enable</span><span class="token" style="color:var(--code-token-punctuation)">:</span><span> </span><span class="token boolean" style="color:#EBCB8B;font-weight:bold">true</span><span> </span><span class="token" style="color:var(--code-token-comment)"># 开启饥饿加载</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>      </span><span class="token atrule" style="color:var(--code-token-variable)">clients</span><span class="token" style="color:var(--code-token-punctuation)">:</span><span> userservice </span><span class="token" style="color:var(--code-token-comment)"># 只对单个服务开启饥饿加载</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span></span><span class="token" style="color:var(--code-token-comment)">#--------------------------------------------------------------------------------------------      </span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span></span><span class="token atrule" style="color:var(--code-token-variable)">ribbon</span><span class="token" style="color:var(--code-token-punctuation)">:</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>  </span><span class="token atrule" style="color:var(--code-token-variable)">eager-load</span><span class="token" style="color:var(--code-token-punctuation)">:</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>      </span><span class="token atrule" style="color:var(--code-token-variable)">enable</span><span class="token" style="color:var(--code-token-punctuation)">:</span><span> </span><span class="token boolean" style="color:#EBCB8B;font-weight:bold">true</span><span> </span><span class="token" style="color:var(--code-token-comment)"># 开启饥饿加载</span><span>
+</span></span><span style="display:block;padding:0 1.25rem"><span>      </span><span class="token atrule" style="color:var(--code-token-variable)">clients</span><span class="token" style="color:var(--code-token-punctuation)">:</span><span> 
+</span></span><span style="display:block;padding:0 1.25rem"><span>        </span><span class="token" style="color:var(--code-token-punctuation)">-</span><span> userservice </span><span class="token" style="color:var(--code-token-comment)"># 对多个服务开启饥饿加载</span><span>
+</span></span><span style="display:block;padding:0 1.25rem">           goodservice</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h2 id="25-nacos注册中心" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">2.5 Nacos注册中心<a class="link_3b154 header-anchor" aria-hidden="true" href="#25-nacos注册中心">#</a></h2>
+<h1 id="7feignhttp客户端" class="text-3xl mb-10 leading-10 tracking-tight title_3b154">7.Feign(HTTP客户端)<a class="link_3b154 header-anchor" aria-hidden="true" href="#7feignhttp客户端">#</a></h1>
+<h2 id="71-feign替代resttemplate" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">7.1 Feign替代RestTemplate<a class="link_3b154 header-anchor" aria-hidden="true" href="#71-feign替代resttemplate">#</a></h2>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">Feign定义</p>
+</blockquote>
+<p class="my-4 leading-7">Feign是一个声明式的http客户端，作用是帮助我们优雅的实现http请求的发现，帮助实现各个微服务内部之间的调用。</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">使用</p>
+</blockquote>
+<p class="my-4 leading-7">Step1. 引入依赖</p>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209154437564.91be419a.png" alt="image-20220209154437564"/></p>
+<p class="my-4 leading-7">Step2. 启动类添加Feign启动注解</p>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209154452236.fbfa2b11.png" alt="image-20220209154452236"/></p>
+<p class="my-4 leading-7">Step3. 编写Feign客户端</p>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209151658578.a2db9c4a.png" alt="image-20220209151658578"/></p>
+<p class="my-4 leading-7">Step4. 测试使用</p>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209151739496.c5bc20a7.png" alt="image-20220209151739496"/></p>
+<h2 id="72-自定义配置" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">7.2 自定义配置<a class="link_3b154 header-anchor" aria-hidden="true" href="#72-自定义配置">#</a></h2>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">概念</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209164321092.0fd6b2cc.png" alt="image-20220209164321092"/></p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">使用配置文件配置Feign日志</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209164434848.199ffb4a.png" alt="image-20220209164434848"/></p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">使用注解配置Feign日志</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209164849881.9696bfb2.png" alt="image-20220209164849881"/></p>
+<h2 id="73-feign使用优化" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">7.3 Feign使用优化<a class="link_3b154 header-anchor" aria-hidden="true" href="#73-feign使用优化">#</a></h2>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">Feign底层客户端实现</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">URLConnection：默认实现，不支持连接池，性能较差</li>
+<li class="[&amp;:not(:first-child)]:mt-2">Apache HttpClient：支持连接池</li>
+<li class="[&amp;:not(:first-child)]:mt-2">OKHttp：支持连接池</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">优化策略</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">使用连接池代替默认URLConnection</li>
+<li class="[&amp;:not(:first-child)]:mt-2">日志级别，最好使用basic或none</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">Feign性能优化-连接池配置</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209165620070.409ff6ed.png" alt="image-20220209165620070"/></p>
+<h2 id="74-最佳实践" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">7.4 最佳实践<a class="link_3b154 header-anchor" aria-hidden="true" href="#74-最佳实践">#</a></h2>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">方式一--继承（耦合度比较高）</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209170014814.658911c4.png" alt="image-20220209170014814"/></p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">方式二--抽取（如果FeignAPI功能比较多，包比较大，orderservice只用到一两个方法，就造成了浪费）</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209170120507.0416eb0f.png" alt="image-20220209170120507"/></p>
+<p class="my-4 leading-7">方式2的实现难点</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">当定义的FeignClient不在SpringBootApplication的扫描包范围时，这些FeignClient无法使用，解决方法如下：</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209171005236.96cf43bb.png" alt="image-20220209171005236"/></p>
+<h1 id="8统一网关gateway" class="text-3xl mb-10 leading-10 tracking-tight title_3b154">8.统一网关Gateway<a class="link_3b154 header-anchor" aria-hidden="true" href="#8统一网关gateway">#</a></h1>
+<h2 id="81-为什么需要网关" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">8.1 为什么需要网关<a class="link_3b154 header-anchor" aria-hidden="true" href="#81-为什么需要网关">#</a></h2>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">网关功能</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">对用户请求做身份认证和权限校验</li>
+<li class="[&amp;:not(:first-child)]:mt-2">将用户请求路由到微服务，并实现负载均衡</li>
+<li class="[&amp;:not(:first-child)]:mt-2">对要不过户请求做限流</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">网关的技术实现</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">gateway</li>
+<li class="[&amp;:not(:first-child)]:mt-2">zuul</li>
+</ul>
+<p class="my-4 leading-7">==对比==：zuul是基于servlet实现，属于阻塞式变成。gateway是基于SPring5中提供的WebFlux，属于响应式变成，具备更好的性能。</p>
+<h2 id="82-gateway快速入门" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">8.2 gateway快速入门<a class="link_3b154 header-anchor" aria-hidden="true" href="#82-gateway快速入门">#</a></h2>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">搭建步骤</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/12.e1119f75.png" alt="12"/></p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">请求流程</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209174439226.7414f710.png" alt="image-20220209174439226"/></p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">总结-&gt;路由可以配置的内容包括以下几点：</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">路由id：路由唯一标识</li>
+<li class="[&amp;:not(:first-child)]:mt-2">路由目标（uri）：路由的目标地址，http代表固定地址，lb代表根据服务名称做负载均衡</li>
+<li class="[&amp;:not(:first-child)]:mt-2">路由断言（predicates）：判断路由规则</li>
+<li class="[&amp;:not(:first-child)]:mt-2">路由过滤器（filters）：对请求或响应做处理</li>
+</ul>
+<h2 id="83-断言工厂" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">8.3 断言工厂<a class="link_3b154 header-anchor" aria-hidden="true" href="#83-断言工厂">#</a></h2>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">作用</p>
+</blockquote>
+<p class="my-4 leading-7">读取用户在配置文件中编写的断言规则，将他们解析出来，并且对请求做出判断</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">Spring提供的11中基本的Predicate工厂</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209175005801.a11452d9.png" alt="image-20220209175005801"/></p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">After断言工厂的使用</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209175858695.a433313c.png" alt="image-20220209175858695"/></p>
+<p class="my-4 leading-7">==当前是2022年，不符合路由规则，此时访问会报404==</p>
+<h2 id="84-过滤器工厂" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">8.4 过滤器工厂<a class="link_3b154 header-anchor" aria-hidden="true" href="#84-过滤器工厂">#</a></h2>
+<h3 id="841-路由过滤器gatewayfilter" class="mt-10 mb-2 leading-7 text-xl title_3b154">8.4.1 路由过滤器GatewayFilter<a class="link_3b154 header-anchor" aria-hidden="true" href="#841-路由过滤器gatewayfilter">#</a></h3>
+<p class="my-4 leading-7">GatewayFilter是网关中提供的一种过滤器，可以对进入网关的请求和微服务返回的响应做处理：</p>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209180256860.63c574bf.png" alt="image-20220209180256860"/></p>
+<h3 id="842-路由过滤器工厂" class="mt-10 mb-2 leading-7 text-xl title_3b154">8.4.2 路由过滤器工厂<a class="link_3b154 header-anchor" aria-hidden="true" href="#842-路由过滤器工厂">#</a></h3>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">过滤器的作用</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">对路由的请求或响应做加工处理，比如添加请求头</li>
+<li class="[&amp;:not(:first-child)]:mt-2">配置在路由下的过滤器只对当前路由的请求生效（==如果想对所有路由都生效，可以使用defaultFilter==）</li>
+</ul>
+<p class="my-4 leading-7">一共30多种。使用时可以参考官网。</p>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209180441253.3b83321b.png" alt="image-20220209180441253"/></p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">例子：给所有进入userservice的请求加一个请求头：Truth=Itcast is freeking awesome！</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209180558252.a2d6d255.png" alt="image-20220209180558252"/></p>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209180819755.6932485c.png" alt="image-20220209180819755"/></p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">优化：给所有请求都加上请求头：Truth=Itcast is freeking awesome！</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220209180923497.54c2f40a.png" alt="image-20220209180923497"/></p>
+<h2 id="85-全局过滤器globalfilter" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">8.5 全局过滤器GlobalFilter<a class="link_3b154 header-anchor" aria-hidden="true" href="#85-全局过滤器globalfilter">#</a></h2>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">作用</p>
+</blockquote>
+<p class="my-4 leading-7">处理一切进入网关的请求和微服务响应，和GatewayFilter的作用一样。==区别==在于GatewayFilter通过配置定义，处理逻辑是固定的；但是GlobalFilter的逻辑需要自己写代码实现。</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">实现方式</p>
+</blockquote>
+<p class="my-4 leading-7"><strong class="font-semibold">实现GlobalFilter接口。</strong></p>
+<p class="my-4 leading-7"><img src="/static/image/image-20220210093916467.2f9a1d6b.png" alt="image-20220210093916467"/></p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">案例：编写一个拦截器，获取请求中的authorization参数。如果用户是admin，放行，否则就拦截。</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/8-5-1-16444579203281.aec9dcac.png" alt="8-5-1"/></p>
+<h2 id="86-过滤器执行顺序" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">8.6 过滤器执行顺序<a class="link_3b154 header-anchor" aria-hidden="true" href="#86-过滤器执行顺序">#</a></h2>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">order值越小，执行顺序越靠前</li>
+<li class="[&amp;:not(:first-child)]:mt-2">order值相等时，安装defaultFilter&gt;路由过滤器&gt;GlobalFilter的顺序执行。</li>
+</ul>
+<h2 id="87-跨域问题" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">8.7 跨域问题<a class="link_3b154 header-anchor" aria-hidden="true" href="#87-跨域问题">#</a></h2>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">定义</p>
+</blockquote>
+<p class="my-4 leading-7">浏览器禁止请求的发起者与服务端发生跨域ajax请求，请求被浏览器拦截的问题。</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">解决方案</p>
+</blockquote>
+<p class="my-4 leading-7">CORS</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">实现</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220210103110838.f4a71eef.png" alt="image-20220210103110838"/></p>
+<h1 id="9docker" class="text-3xl mb-10 leading-10 tracking-tight title_3b154">9.Docker<a class="link_3b154 header-anchor" aria-hidden="true" href="#9docker">#</a></h1>
+<h2 id="91-初识docker" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">9.1 初识Docker<a class="link_3b154 header-anchor" aria-hidden="true" href="#91-初识docker">#</a></h2>
+<h3 id="911-概念" class="mt-10 mb-2 leading-7 text-xl title_3b154">9.1.1 概念<a class="link_3b154 header-anchor" aria-hidden="true" href="#911-概念">#</a></h3>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">Docker如何解决大型项目依赖关系复杂、不同组件依赖兼容性的问题？</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">Docker允许开发中将应用、依赖、函数库、配置一起<strong class="font-semibold">打包</strong>，形成可移植镜像。</li>
+<li class="[&amp;:not(:first-child)]:mt-2">Docker应用运行在容器中，使用沙箱机制，相互<strong class="font-semibold">隔离</strong></li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">Docker如何解决开发、测试、生产环境有差异的问题？</p>
+</blockquote>
+<p class="my-4 leading-7">Docker镜像中包含完整的运行环境，包括系统函数库，仅依赖系统的Linux内核，因此可以在任意Linux操作系统上运行。</p>
+<h3 id="912-docker与虚拟机的区别" class="mt-10 mb-2 leading-7 text-xl title_3b154">9.1.2 Docker与虚拟机的区别<a class="link_3b154 header-anchor" aria-hidden="true" href="#912-docker与虚拟机的区别">#</a></h3>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">Docker是一个系统进程；虚拟机是在操作系统中的操作系统</li>
+<li class="[&amp;:not(:first-child)]:mt-2">Docker体积小，启动速度快，性能好；虚拟机体积大，启动速度慢，性能较差。</li>
+</ul>
+<p class="my-4 leading-7"><img src="/static/image/image-20220210104913398.591eacfb.png" alt="image-20220210104913398"/></p>
+<h3 id="913-docker架构" class="mt-10 mb-2 leading-7 text-xl title_3b154">9.1.3 Docker架构<a class="link_3b154 header-anchor" aria-hidden="true" href="#913-docker架构">#</a></h3>
+<p class="my-4 leading-7"><img src="/static/image/image-20220210131410083.2678a70b.png" alt="image-20220210131410083"/></p>
+<h2 id="92-数据卷" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">9.2 数据卷<a class="link_3b154 header-anchor" aria-hidden="true" href="#92-数据卷">#</a></h2>
+<p class="my-4 leading-7"><img src="/static/image/image-20220210140826301.5f0123b4.png" alt="image-20220210140826301"/></p>
+<p class="my-4 leading-7"><img src="/static/image/image-20220210141144238.1f4647f1.png" alt="image-20220210141144238"/></p>
+<h2 id="93-目录挂载" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">9.3 目录挂载<a class="link_3b154 header-anchor" aria-hidden="true" href="#93-目录挂载">#</a></h2>
+<p class="my-4 leading-7">命令和数据卷挂载一致。</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">目录挂载和数据卷挂载的区别</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220210143457921.520554d2.png" alt="image-20220210143457921"/></p>
+<h2 id="94-镜像" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">9.4 镜像<a class="link_3b154 header-anchor" aria-hidden="true" href="#94-镜像">#</a></h2>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">定义</p>
+</blockquote>
+<p class="my-4 leading-7">镜像是将<strong class="font-semibold">应用程序</strong>及其需要的<strong class="font-semibold">系统函数库</strong>、<strong class="font-semibold">环境</strong>、<strong class="font-semibold">配置</strong>、依赖打包而成。</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">镜像结构</p>
+</blockquote>
+<p class="my-4 leading-7">==镜像是分层结构，每一层称为一个Layer==</p>
+<p class="my-4 leading-7"><img src="/static/image/image-20220210143938080.32583e34.png" alt="image-20220210143938080"/></p>
+<h2 id="95-dockercompose" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">9.5 DockerCompose<a class="link_3b154 header-anchor" aria-hidden="true" href="#95-dockercompose">#</a></h2>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">概念</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">DockerCompose基于Compose文件实现快速部署分布式应用。</p>
+</li>
+<li class="[&amp;:not(:first-child)]:mt-2">
+<p class="my-4 leading-7">Compose文件是一个文本文件，通过指令定义急群众的每个容器如何运行。</p>
+<p class="my-4 leading-7"><img src="/static/image/image-20220210145521763.0952ca1b.png" alt="image-20220210145521763"/></p>
+</li>
+</ul>
+<h1 id="10--服务异步通讯rabbitmq" class="text-3xl mb-10 leading-10 tracking-tight title_3b154">10.  服务异步通讯RabbitMQ<a class="link_3b154 header-anchor" aria-hidden="true" href="#10--服务异步通讯rabbitmq">#</a></h1>
+<h2 id="101-初始mq" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">10.1 初始MQ<a class="link_3b154 header-anchor" aria-hidden="true" href="#101-初始mq">#</a></h2>
+<h3 id="1011-同步通讯" class="mt-10 mb-2 leading-7 text-xl title_3b154">10.1.1 同步通讯<a class="link_3b154 header-anchor" aria-hidden="true" href="#1011-同步通讯">#</a></h3>
+<p class="my-4 leading-7">==微服务间基于Feign的调用就属于同步方式。==</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">优点</p>
+</blockquote>
+<p class="my-4 leading-7">时效性强，能够立即得到结果</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">同步调用的问题</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2"><strong class="font-semibold">耦合度高</strong>：每次加入新需求，都要改原来的代码</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><strong class="font-semibold">性能下降</strong>：调用者需要等待提供者响应。如果调用链过程则响应时间等于每次调用的时间之和</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><strong class="font-semibold">资源浪费</strong>：调用链中的每个服务在等待响应过程中，不能释放请求占用的资源，高并发场景下极度浪费系统资源</li>
+<li class="[&amp;:not(:first-child)]:mt-2"><strong class="font-semibold">级联失败</strong>：如果提供者出现问题，所有调用方法都会跟着出问题，如同多米诺骨牌，迅速导致整个微服务群故障</li>
+</ul>
+<h3 id="1012-异步通讯" class="mt-10 mb-2 leading-7 text-xl title_3b154">10.1.2 异步通讯<a class="link_3b154 header-anchor" aria-hidden="true" href="#1012-异步通讯">#</a></h3>
+<p class="my-4 leading-7">==异步调用常见实现就是事件驱动模式。==</p>
+<p class="my-4 leading-7"><img src="/static/image/image-20220210164846034.b942216f.png" alt="image-20220210164846034"/></p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">优势</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">服务解耦</li>
+<li class="[&amp;:not(:first-child)]:mt-2">性能提升，吞吐量提高</li>
+<li class="[&amp;:not(:first-child)]:mt-2">服务没有强依赖，不担心级联失败问题</li>
+<li class="[&amp;:not(:first-child)]:mt-2">流量削峰</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">缺点</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">依赖于Broker的可靠性、安全性、吞吐能力</li>
+<li class="[&amp;:not(:first-child)]:mt-2">架构复杂了，业务没有明显的流程线，不好追踪管理</li>
+</ul>
+<h3 id="1013-mq常见框架" class="mt-10 mb-2 leading-7 text-xl title_3b154">10.1.3 MQ常见框架<a class="link_3b154 header-anchor" aria-hidden="true" href="#1013-mq常见框架">#</a></h3>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">MQ定义</p>
+</blockquote>
+<p class="my-4 leading-7">MQ（MessageQueue），存放消息的队列，即时间驱动架构中的Broker。</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">MQ常见框架对比</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220210171202166.0f3f66e6.png" alt="image-20220210171202166"/></p>
+<h2 id="102-rabbitmq快速入门" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">10.2 RabbitMQ快速入门<a class="link_3b154 header-anchor" aria-hidden="true" href="#102-rabbitmq快速入门">#</a></h2>
+<h3 id="1021-概述" class="mt-10 mb-2 leading-7 text-xl title_3b154">10.2.1 概述<a class="link_3b154 header-anchor" aria-hidden="true" href="#1021-概述">#</a></h3>
+<p class="my-4 leading-7">==RabbitMQ最擅长的是消息的可靠性、稳定性，以及系统的高可用==</p>
+<p class="my-4 leading-7">官网：<a target="_blank" rel="noopener noreferrer" href="https://www.rabbitmq.com/" class="link_03735  link_3b154 inline-link_3b154">Messaging that just works — RabbitMQ</a></p>
+<h4 id="10211-单机部署mq" class="mt-8 leading-6 text-lg title_3b154">10.2.1.1 单机部署MQ<a class="link_3b154 header-anchor" aria-hidden="true" href="#10211-单机部署mq">#</a></h4>
+<p class="my-4 leading-7">Step1. 下载RabbitMQ镜像</p>
+<div class="language-shell"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-shell" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>docker pull rabbitmq:3-management</span></span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<p class="my-4 leading-7">Step2. 运行MQ容器</p>
+<div class="language-shell"><div class="rspress-code-content rspress-scrollbar"><div><pre class="code" style="background-color:inherit"><code class="language-shell" style="white-space:pre"><span style="display:block;padding:0 1.25rem"><span>docker run \
+</span></span><span style="display:block;padding:0 1.25rem">  -e RABBITMQ_DEFAULT_USER=itcast \
+</span><span style="display:block;padding:0 1.25rem">  -e RABBITMQ_DEFAULT_PASS=123456 \
+</span><span style="display:block;padding:0 1.25rem">  --name mq \
+</span><span style="display:block;padding:0 1.25rem">  --hostname mq1 \ # 配置主机名，单机的话可以不设置，但是集群部署必须设置
+</span><span style="display:block;padding:0 1.25rem">  -p 15672:15672 \   # mq管理平台的端口，提供一个UI界面
+</span><span style="display:block;padding:0 1.25rem">  -p 5672:5672 \   # 消息接收与发送端口
+</span><span style="display:block;padding:0 1.25rem">  -d \
+</span><span style="display:block;padding:0 1.25rem">  rabbitmq:3-management</span></code></pre></div><div class="code-button-group_15153"><button title="Toggle code wrap"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrapped_15153"><path fill="#22a041" d="M21 5H3v2h18zM3 19h7v-2H3zm0-6h15c1 0 2 .43 2 2s-1 2-2 2h-2v-2l-4 3 4 3v-2h2c2.95 0 4-1.27 4-4 0-2.72-1-4-4-4H3z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="icon-wrap_15153"><path fill="currentColor" d="M16 7H3V5h13v2M3 19h13v-2H3v2m19-7-4-3v2H3v2h15v2l4-3Z"></path></svg></button><button class="code-copy-button_15153" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 30 30" class="icon-copy_15153"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z"></path><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z"></path></svg><svg width="32" height="32" viewBox="0 0 30 30" class="icon-success_15153"><path fill="#49cd37" d="m13 24-9-9 1.414-1.414L13 21.171 26.586 7.586 28 9 13 24z"></path></svg></button></div></div></div>
+<h3 id="1022-rabbitmq概念和结构" class="mt-10 mb-2 leading-7 text-xl title_3b154">10.2.2 RabbitMQ概念和结构<a class="link_3b154 header-anchor" aria-hidden="true" href="#1022-rabbitmq概念和结构">#</a></h3>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">概念</p>
+</blockquote>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">channel：操作MQ的工具</li>
+<li class="[&amp;:not(:first-child)]:mt-2">exchange：路由消息到队列中</li>
+<li class="[&amp;:not(:first-child)]:mt-2">queue：缓存消息</li>
+<li class="[&amp;:not(:first-child)]:mt-2">virtual host：虚拟主机，是对queue、exchange等资源的逻辑分组</li>
+</ul>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">结构</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220210173943912.3cfbaba5.png" alt="image-20220210173943912"/></p>
+<h2 id="103-常见消息模型" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">10.3 常见消息模型<a class="link_3b154 header-anchor" aria-hidden="true" href="#103-常见消息模型">#</a></h2>
+<p class="my-4 leading-7"><img src="/static/image/image-20220210174208165.6990013c.png" alt="image-20220210174208165"/></p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">Hello World 实践</p>
+</blockquote>
+<p class="my-4 leading-7"><img src="/static/image/image-20220210175441671.f8029633.png" alt="image-20220210175441671"/></p>
+<h2 id="104-springamqp" class="mt-12 mb-6 pt-8 text-2xl tracking-tight border-t-[1px] border-divider-light title_3b154">10.4 SpringAMQP<a class="link_3b154 header-anchor" aria-hidden="true" href="#104-springamqp">#</a></h2>
+<h3 id="1041-概念" class="mt-10 mb-2 leading-7 text-xl title_3b154">10.4.1 概念<a class="link_3b154 header-anchor" aria-hidden="true" href="#1041-概念">#</a></h3>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">AMQP</p>
+</blockquote>
+<p class="my-4 leading-7"><strong class="font-semibold">A</strong>dvanced <strong class="font-semibold">M</strong>essage <strong class="font-semibold">Q</strong>ueuing <strong class="font-semibold">P</strong>rotocol，用于在应用程序之间传递业务消息的开放标准。该协议与平台无关，更符合微服务中独立性要求。</p>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">Spring AMQP</p>
+</blockquote>
+<p class="my-4 leading-7">Spring AMQP是基于AMQP协议定义的一套API规范，提供了模板来发送和接收消息。包含两部分，其中spring-amqp是基础抽象，spring-rabbit是底层的默认实现。</p>
+<p class="my-4 leading-7">==特征==</p>
+<ul class="list-disc pl-5 my-4 leading-7">
+<li class="[&amp;:not(:first-child)]:mt-2">侦听器容器，用于异步处理入栈消息</li>
+<li class="[&amp;:not(:first-child)]:mt-2">支持用于发送和接收消息的RabbitTemplate</li>
+<li class="[&amp;:not(:first-child)]:mt-2">支持RabbitAdmin自动声明队列、交换、绑定</li>
+</ul>
+<h3 id="1042-案例" class="mt-10 mb-2 leading-7 text-xl title_3b154">10.4.2 案例<a class="link_3b154 header-anchor" aria-hidden="true" href="#1042-案例">#</a></h3>
+<blockquote class="border-l-2 border-solid border-divider pl-4 my-6 transition-colors duration-500 blockquote_3b154">
+<p class="my-4 leading-7">利用SpringAMQP实现HelloWorld中的基础消息队列功能</p>
+</blockquote>
+<p class="my-4 leading-7">流程如下：</p><!--/$--></div><div class="rspress-doc-footer"><footer class="mt-8"><div class="xs:flex pb-5 px-2 justify-end items-center"></div><div class="flex flex-col"></div><div class="flex flex-col sm:flex-row sm:justify-around gap-4 pt-6"><div class="prev_e7091 flex flex-col"></div><div class="next_e7091 flex flex-col"><a class="link_03735 pager-link_9b9a7 next_9b9a7 cursor-pointer" target="" href="/tang/mservice/1.html"><span class="desc_9b9a7">Next Page</span><span class="title_9b9a7">2.云平台部署Nacos</span></a></div></div></footer></div></div></div><div class="aside-container_edeb4"><div><div class="flex flex-col"><div class="&lt;lg:hidden"><div id="aside-container" class="relative text-sm font-medium"><div class="leading-7 block text-sm font-semibold pl-3">ON THIS PAGE</div><nav class="mt-1"><ul class="relative"><li><a href="#11-分布式架构" title="1.1 分布式架构" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">1.1 分布式架构</span></a></li><li><a href="#12-微服务" title="1.2 微服务" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">1.2 微服务</span></a></li><li><a href="#13-springcloud" title="1.3 SpringCloud" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">1.3 SpringCloud</span></a></li><li><a href="#21-服务拆分注意事项" title="2.1 服务拆分注意事项" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">2.1 服务拆分注意事项</span></a></li><li><a href="#22-服务调用关系" title="2.2 服务调用关系" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">2.2 服务调用关系</span></a></li><li><a href="#23-eureka注册中心" title="2.3 Eureka注册中心" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">2.3 Eureka注册中心</span></a></li><li><a href="#24-ribbon负载均衡" title="2.4 Ribbon负载均衡" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">2.4 Ribbon负载均衡</span></a></li><li><a href="#25-nacos注册中心" title="2.5 Nacos注册中心" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">2.5 Nacos注册中心</span></a></li><li><a href="#71-feign替代resttemplate" title="7.1 Feign替代RestTemplate" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">7.1 Feign替代RestTemplate</span></a></li><li><a href="#72-自定义配置" title="7.2 自定义配置" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">7.2 自定义配置</span></a></li><li><a href="#73-feign使用优化" title="7.3 Feign使用优化" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">7.3 Feign使用优化</span></a></li><li><a href="#74-最佳实践" title="7.4 最佳实践" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">7.4 最佳实践</span></a></li><li><a href="#81-为什么需要网关" title="8.1 为什么需要网关" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">8.1 为什么需要网关</span></a></li><li><a href="#82-gateway快速入门" title="8.2 gateway快速入门" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">8.2 gateway快速入门</span></a></li><li><a href="#83-断言工厂" title="8.3 断言工厂" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">8.3 断言工厂</span></a></li><li><a href="#84-过滤器工厂" title="8.4 过滤器工厂" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">8.4 过滤器工厂</span></a></li><li><a href="#841-路由过滤器gatewayfilter" title="8.4.1 路由过滤器GatewayFilter" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">8.4.1 路由过滤器GatewayFilter</span></a></li><li><a href="#842-路由过滤器工厂" title="8.4.2 路由过滤器工厂" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">8.4.2 路由过滤器工厂</span></a></li><li><a href="#85-全局过滤器globalfilter" title="8.5 全局过滤器GlobalFilter" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">8.5 全局过滤器GlobalFilter</span></a></li><li><a href="#86-过滤器执行顺序" title="8.6 过滤器执行顺序" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">8.6 过滤器执行顺序</span></a></li><li><a href="#87-跨域问题" title="8.7 跨域问题" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">8.7 跨域问题</span></a></li><li><a href="#91-初识docker" title="9.1 初识Docker" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">9.1 初识Docker</span></a></li><li><a href="#911-概念" title="9.1.1 概念" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">9.1.1 概念</span></a></li><li><a href="#912-docker与虚拟机的区别" title="9.1.2 Docker与虚拟机的区别" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">9.1.2 Docker与虚拟机的区别</span></a></li><li><a href="#913-docker架构" title="9.1.3 Docker架构" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">9.1.3 Docker架构</span></a></li><li><a href="#92-数据卷" title="9.2 数据卷" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">9.2 数据卷</span></a></li><li><a href="#93-目录挂载" title="9.3 目录挂载" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">9.3 目录挂载</span></a></li><li><a href="#94-镜像" title="9.4 镜像" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">9.4 镜像</span></a></li><li><a href="#95-dockercompose" title="9.5 DockerCompose" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">9.5 DockerCompose</span></a></li><li><a href="#101-初始mq" title="10.1 初始MQ" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">10.1 初始MQ</span></a></li><li><a href="#1011-同步通讯" title="10.1.1 同步通讯" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">10.1.1 同步通讯</span></a></li><li><a href="#1012-异步通讯" title="10.1.2 异步通讯" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">10.1.2 异步通讯</span></a></li><li><a href="#1013-mq常见框架" title="10.1.3 MQ常见框架" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">10.1.3 MQ常见框架</span></a></li><li><a href="#102-rabbitmq快速入门" title="10.2 RabbitMQ快速入门" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">10.2 RabbitMQ快速入门</span></a></li><li><a href="#1021-概述" title="10.2.1 概述" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">10.2.1 概述</span></a></li><li><a href="#10211-单机部署mq" title="10.2.1.1 单机部署MQ" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:24px;font-weight:semibold"><span class="aside-link-text block">10.2.1.1 单机部署MQ</span></a></li><li><a href="#1022-rabbitmq概念和结构" title="10.2.2 RabbitMQ概念和结构" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">10.2.2 RabbitMQ概念和结构</span></a></li><li><a href="#103-常见消息模型" title="10.3 常见消息模型" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">10.3 常见消息模型</span></a></li><li><a href="#104-springamqp" title="10.4 SpringAMQP" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:0;font-weight:semibold"><span class="aside-link-text block">10.4 SpringAMQP</span></a></li><li><a href="#1041-概念" title="10.4.1 概念" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">10.4.1 概念</span></a></li><li><a href="#1042-案例" title="10.4.2 案例" class="aside-link transition-all duration-300 hover:text-text-1 text-text-2 block" style="margin-left:12px;font-weight:semibold"><span class="aside-link-text block">10.4.2 案例</span></a></li></ul></nav></div></div></div></div></div></div></div></section></div></div>
+  <div id="search-container"></div>
+</body>
+
+</html>
