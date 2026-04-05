@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "rspress build",
-    "dev": "rspress dev --post",
+    "dev": "rspress dev --host",
     "preview": "rspress preview"
   },
   "dependencies": {
