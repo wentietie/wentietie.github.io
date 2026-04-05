@@ -47,6 +47,10 @@ export default defineConfig({
         text: 'AI',
         items: [
           {
+            text: '工具',
+            link: '/ai/tools/opencli'
+          },
+          {
             text: '大模型入门',
             link: '/ai/llm/llm-study/part1'
           },
@@ -687,6 +691,14 @@ export default defineConfig({
             { text: 'postgres-mcp', link: '/ai/llm/mcp/postgres-mcp' },
             { text: 'context7', link: '/ai/llm/mcp/context7' },
             { text: 'filesystem-mcp', link: '/ai/llm/mcp/filesystem-mcp' },
+          ],
+        },
+      ],
+      '/ai/tools/': [
+        {
+          text: 'AI 工具',
+          items: [
+            { text: 'OpenCLI', link: '/ai/tools/opencli' },
           ],
         },
       ],
