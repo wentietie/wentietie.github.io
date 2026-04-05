@@ -287,7 +287,7 @@ OpenCode 生态铁三角：
 
 - [官方网站](https://ohmyclaudecode.com/)
 - [GitHub](https://github.com/anthropic/oh-my-claude-code)
-- [Superpowers 指南](../omc-superpowers-guide.md)
+- [Superpowers 指南](./omc-superpowers-guide.md)
 - [Skills 盘点](./skills-2026.md)
 
 **标签**：#OhMyClaudeCode #OMC #MultiAgent #ClaudeCode
