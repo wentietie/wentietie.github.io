@@ -645,6 +645,7 @@ export default defineConfig({
             { text: 'OpenCode与ClaudeCode对比', link: '/ai/llm/claude-code/04_OpenCode与ClaudeCode对比' },
             { text: 'Oh-My-ClaudeCode', link: '/ai/llm/claude-code/oh-my-claude-code' },
             { text: 'OpenSpec+Superpowers', link: '/ai/llm/claude-code/openspec-superpowers' },
+            { text: 'OMC+Superpowers使用指南', link: '/ai/llm/claude-code/omc-superpowers-guide' },
             { text: '2026热门Skills盘点', link: '/ai/llm/skills-2026' },
             { text: '最佳实践', link: '/ai/llm/claude-code/best-practices/openspec-superpowers' },
             { text: 'CLAUDE.md与效率优化', link: '/ai/llm/claude-code/claude-md-tips' },
