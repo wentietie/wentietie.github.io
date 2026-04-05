@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(cd:*)",
+      "Bash(npm run:*)",
+      "mcp__context7__resolve-library-id",
+      "Bash(npm ls:*)",
+      "Bash(npm show:*)",
+      "Bash(node:*)",
+      "WebFetch(domain:rspress.rs)",
+      "WebSearch",
+      "mcp__context7__query-docs",
+      "Bash(grep:*)",
+      "Bash(opencli list:*)"
+    ]
+  }
+}

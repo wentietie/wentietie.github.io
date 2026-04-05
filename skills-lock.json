@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "skills": {
+    "opencli-explorer": {
+      "source": "jackwener/opencli",
+      "sourceType": "github",
+      "computedHash": "90ecffc36b69f15951a5a25a6bc2750565408231c93cf0b7c1aa17f78714fbdf"
+    },
+    "opencli-oneshot": {
+      "source": "jackwener/opencli",
+      "sourceType": "github",
+      "computedHash": "b06ca107cfa78a686a02a82659d9c1f7b1350cbc447af35e712b1ab97ed0aebc"
+    },
+    "opencli-operate": {
+      "source": "jackwener/opencli",
+      "sourceType": "github",
+      "computedHash": "5a720ebbe1e9d3eeb7dd3bc44c97056d48e929a0127afd70328488f54540e0b8"
+    },
+    "opencli-usage": {
+      "source": "jackwener/opencli",
+      "sourceType": "github",
+      "computedHash": "c89007c751270bf8f2733d8ce77a1dfadb29a17ed1eabe22f509218ab335839d"
+    },
+    "rspress-v2-upgrade": {
+      "source": "rstackjs/agent-skills",
+      "sourceType": "github",
+      "computedHash": "a96e355440af6a1f55a5ec7f900b637ffff432a5cf298fdf0da313e80c34e15b"
+    },
+    "smart-search": {
+      "source": "jackwener/opencli",
+      "sourceType": "github",
+      "computedHash": "dde9af74e6aa46f28810d5e25f5ad645d02180137a6a1e046e30babb3c45ef3a"
+    }
+  }
+}
