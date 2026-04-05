@@ -3,13 +3,13 @@
 
 [https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
 
-![](./images/CentOS7Installjdk1.8/sever-install-jdk-1.png)
+![](./images/CentOS7INstalljdk1.8/sever-install-jdk-1.png)
 
 ## 2 安装
 
 创建`/usr/java8`文件夹，将压缩包上传至该文件夹内，进行解压。
 
-![](./images/CentOS7Installjdk1.8/sever-install-jdk-2.png)
+![](./images/CentOS7INstalljdk1.8/sever-install-jdk-2.png)
 
 ## 3 配置JDK
 
@@ -22,7 +22,7 @@ export CLASSPATH=.:${JAVA_HOME}/jre/lib/rt.jar:${JAVA_HOME}/lib/dt.jar:${JAVA_HO
 export PATH=$PATH:${JAVA_HOME}/bin
 ```
 
-![](./images/CentOS7Installjdk1.8/sever-install-jdk-3.png)
+![](./images/CentOS7INstalljdk1.8/sever-install-jdk-3.png)
 
 ## 4 让环境变量生效
 
@@ -37,4 +37,4 @@ java -version
 javac -version
 ```
 
-![](./images/CentOS7Installjdk1.8/sever-install-jdk-4.png)
+![](./images/CentOS7INstalljdk1.8/sever-install-jdk-4.png)
