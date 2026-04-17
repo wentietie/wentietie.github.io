@@ -16,8 +16,19 @@
       "Skill(opencli-operate)",
       "mcp__open-websearch__fetchWebContent",
       "Bash(npm install:*)",
-      "Bash(opencli browser:*)"
+      "Bash(opencli browser:*)",
+      "WebFetch(domain:javaguide.cn)",
+      "Bash(opencli gemini:*)",
+      "Bash(omc update *)",
+      "mcp__plugin_oh-my-claudecode_t__lsp_servers",
+      "mcp__plugin_oh-my-claudecode_t__lsp_diagnostics",
+      "mcp__plugin_oh-my-claudecode_t__python_repl",
+      "Bash(python -m venv .venv)",
+      "Bash(.venv/bin/pip install *)",
+      "Bash(.venv/Scripts/pip install *)",
+      "mcp__open-websearch__search"
     ]
   },
-  "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+  "permissionMode": "bypass"
 }
