@@ -60,7 +60,7 @@ export default defineConfig({
           },
           {
             text: 'Harness Engineering',
-            link: '/ai/llm/harness/part1'
+            link: '/ai/llm/harness/javaguide-harness-summary'
           },
           {
             text: 'Claude Code',
@@ -632,9 +632,10 @@ export default defineConfig({
         {
           text: 'Harness Engineering',
           items: [
+            { text: '深度解析：完整指南', link: '/ai/llm/harness/harness-engineering-deep-dive' },
+            { text: 'JavaGuide 深度总结', link: '/ai/llm/harness/javaguide-harness-summary' },
             { text: '从零理解到动手实践', link: '/ai/llm/harness/part1' },
             { text: 'Wow-harness', link: '/ai/llm/harness/wow-harness' },
-            { text: '为什么重要', link: '/ai/llm/harness/harness-engineering-intro' },
             { text: '六大组件全解析', link: '/ai/llm/harness/harness-six-components' },
           ],
         },
