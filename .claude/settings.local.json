@@ -26,7 +26,9 @@
       "Bash(python -m venv .venv)",
       "Bash(.venv/bin/pip install *)",
       "Bash(.venv/Scripts/pip install *)",
-      "mcp__open-websearch__search"
+      "mcp__open-websearch__search",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ]
   },
   "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
