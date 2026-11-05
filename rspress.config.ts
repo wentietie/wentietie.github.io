@@ -102,7 +102,7 @@ export default defineConfig({
           { text: 'Python', link: '/tang/Python/1', activeMatch: '^(?:/tang/Python/|/tang/Python/)' },
           { text: 'Git / GitLab', link: '/tang/gitlab/gitlab-commands', activeMatch: '^(?:/tang/gitlab/|/tang/gitlab/)' },
           { text: '服务器环境安装', link: '/tang/server/CentOS7root账号免密登录', activeMatch: '^(?:/tang/server/|/tang/server/)' },
-          { text: '项目上线', link: '/tang/项目上线/xiaochengxu', activeMatch: '^(?:/tang/项目上线/xiaochengxu|/tang/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/xiaochengxu)(\\.html)?$' },
+          { text: '项目上线', link: '/tang/项目上线/xiaochengxu', activeMatch: '^(?:/tang/项目上线/|/tang/%E9%A1%B9%E7%9B%AE%E4%B8%8A%E7%BA%BF/)' },
           { text: '物联网项目', link: '/tang/IoTPlatform/jetlinks', activeMatch: '^(?:/tang/IoTPlatform/jetlinks|/tang/IoTPlatform/jetlinks)(\\.html)?$' },
           { text: '其他', link: '/tang/typora配置/1', activeMatch: '^(?:/tang/typora配置/1|/tang/typora%E9%85%8D%E7%BD%AE/1)(\\.html)?$' }
         ]
@@ -492,7 +492,9 @@ export default defineConfig({
             { text: '组件深入', link: '/formwork/vue3/reactive/part9' },
             { text: '模板引用', link: '/formwork/vue3/reactive/part10' },
             { text: '组件基础', link: '/formwork/vue3/reactive/part11' },
-            { text: '应用架构设计基础', link: '/formwork/vue3/reactive/part12' }
+            { text: '应用架构设计基础', link: '/formwork/vue3/reactive/part12' },
+            { text: 'setup 与兄弟组件传值', link: '/formwork/vue3/reactive/setup-sibling' },
+            { text: 'setup + ts 组件传值', link: '/formwork/vue3/reactive/setup-ts' }
           ]
         }
       ],
@@ -535,7 +537,9 @@ export default defineConfig({
             { text: '组件深入', link: '/formwork/vue3/reactive/part9' },
             { text: '模板引用', link: '/formwork/vue3/reactive/part10' },
             { text: '组件基础', link: '/formwork/vue3/reactive/part11' },
-            { text: '应用架构设计基础', link: '/formwork/vue3/reactive/part12' }
+            { text: '应用架构设计基础', link: '/formwork/vue3/reactive/part12' },
+            { text: 'setup 与兄弟组件传值', link: '/formwork/vue3/reactive/setup-sibling' },
+            { text: 'setup + ts 组件传值', link: '/formwork/vue3/reactive/setup-ts' }
           ]
         },
         {
@@ -595,7 +599,10 @@ export default defineConfig({
             { text: 'beforeunload 事件', link: '/notes/JS/beforeunload' },
             { text: '宏任务、微任务、队列和计划', link: '/notes/JS/usually-functions' },
             { text: 'Webpack 常用优化技巧', link: '/notes/JS/webpack-optimize' },
-            { text: 'Vue 项目性能优化', link: '/notes/JS/vue-webpack-optimize' }
+            { text: 'Vue 项目性能优化', link: '/notes/JS/vue-webpack-optimize' },
+            { text: 'JavaScript 垃圾回收机制', link: '/notes/JS/gc' },
+            { text: '暂时性死区与函数作用域', link: '/notes/JS/tdz' },
+            { text: '深拷贝与浅拷贝', link: '/notes/JS/copy' }
           ]
         }
       ],
@@ -645,7 +652,10 @@ export default defineConfig({
             { text: 'beforeunload 事件', link: '/notes/JS/beforeunload' },
             { text: '宏任务、微任务、队列和计划', link: '/notes/JS/usually-functions' },
             { text: 'Webpack 常用优化技巧', link: '/notes/JS/webpack-optimize' },
-            { text: 'Vue 项目性能优化', link: '/notes/JS/vue-webpack-optimize' }
+            { text: 'Vue 项目性能优化', link: '/notes/JS/vue-webpack-optimize' },
+            { text: 'JavaScript 垃圾回收机制', link: '/notes/JS/gc' },
+            { text: '暂时性死区与函数作用域', link: '/notes/JS/tdz' },
+            { text: '深拷贝与浅拷贝', link: '/notes/JS/copy' }
           ]
         },
         {
@@ -841,11 +851,12 @@ export default defineConfig({
           ]
         }
       ],
-      '/tang/项目上线/xiaochengxu': [
+      '/tang/项目上线/': [
         {
           text: '项目上线',
           items: [
-            { text: '记一次小程序接口的发布', link: '/tang/项目上线/xiaochengxu' }
+            { text: '记一次小程序接口的发布', link: '/tang/项目上线/xiaochengxu' },
+            { text: '微信小程序登录流程与实现', link: '/tang/项目上线/wx-login' }
           ]
         }
       ],
@@ -1012,7 +1023,8 @@ export default defineConfig({
         {
           text: '项目上线',
           items: [
-            { text: '记一次小程序接口的发布', link: '/tang/项目上线/xiaochengxu' }
+            { text: '记一次小程序接口的发布', link: '/tang/项目上线/xiaochengxu' },
+            { text: '微信小程序登录流程与实现', link: '/tang/项目上线/wx-login' }
           ]
         },
         {

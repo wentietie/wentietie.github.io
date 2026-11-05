@@ -11,6 +11,7 @@ Project deployment guides covering production environment setup, domain configur
 | File | Description |
 |------|-------------|
 | `xiaochengxu.md` | WeChat mini-program deployment guide |
+| `wx-login.md` | 微信小程序登录流程与实现 |
 
 ## Topics Covered
 
