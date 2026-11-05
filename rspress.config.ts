@@ -47,7 +47,7 @@ export default defineConfig({
         link: '/JavaScript/basic/part1',
         activeMatch: '^(?:/JavaScript/|/JavaScript/)',
         items: [
-          { text: '重学 JS', link: '/JavaScript/basic/part1', activeMatch: '^(?:/JavaScript/basic/part1|/JavaScript/basic/part1)(\\.html)?$' },
+          { text: '重学 JS', link: '/JavaScript/basic/part1', activeMatch: '^(?:/JavaScript/basic/|/JavaScript/basic/)' },
           { text: 'JS 高级', link: '/JavaScript/gaoji/p1', activeMatch: '^(?:/JavaScript/gaoji/p1|/JavaScript/gaoji/p1)(\\.html)?$' },
           { text: 'ES6 入门', link: '/JavaScript/es6/es6-1', activeMatch: '^(?:/JavaScript/es6/|/JavaScript/es6/)' },
           { text: '你不知道的 JavaScript', link: '/JavaScript/youdontknowjs/part1', activeMatch: '^(?:/JavaScript/youdontknowjs/|/JavaScript/youdontknowjs/)' },
@@ -315,11 +315,17 @@ export default defineConfig({
           ]
         }
       ],
-      '/JavaScript/basic/part1': [
+      '/JavaScript/basic/': [
         {
           text: '重学 JS',
           items: [
-            { text: '第一节', link: '/JavaScript/basic/part1' }
+            { text: '产生式（BNF）', link: '/JavaScript/basic/part1' },
+            { text: '原型与原型链', link: '/JavaScript/basic/part2' },
+            { text: '作用域与执行上下文', link: '/JavaScript/basic/part3' },
+            { text: 'this、闭包与参数传递', link: '/JavaScript/basic/part4' },
+            { text: '继承', link: '/JavaScript/basic/part5' },
+            { text: '排序算法', link: '/JavaScript/basic/part6' },
+            { text: '模块机制', link: '/JavaScript/basic/part7' }
           ]
         }
       ],
@@ -352,7 +358,8 @@ export default defineConfig({
             { text: 'Module 的加载实现', link: '/JavaScript/es6/es6-15' },
             { text: 'Module 的语法', link: '/JavaScript/es6/es6-16' },
             { text: 'Class 的继承', link: '/JavaScript/es6/es6-17' },
-            { text: 'Reflect', link: '/JavaScript/es6/es6-18' }
+            { text: 'Reflect', link: '/JavaScript/es6/es6-18' },
+            { text: '重学 ES6', link: '/JavaScript/es6/es6-19' }
           ]
         }
       ],
