@@ -1,0 +1,10 @@
+/**
+ * Rspress 对「带下拉菜单（items）的导航项」不会渲染激活态，
+ * 这里在下拉项命中当前页面时，通过 :has() 保持父级分组高亮。
+ */
+.rp-nav-menu__item:has(.rp-hover-group__item--active) .rp-nav-menu__item__container {
+  color: var(--rp-c-brand);
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+}
