@@ -12,6 +12,7 @@ Root directory for all documentation content. This is the Rspress document root 
 |-----------|---------|
 | `ai/` | AI and LLM documentation (see `ai/AGENTS.md`) |
 | `JavaScript/` | JavaScript/TypeScript learning notes (see `JavaScript/AGENTS.md`) |
+| `frontend/` | 重学前端系列笔记（winter，10 parts） |
 | `formwork/` | Frontend framework notes - Vue2, Vue3, Spring5, Spring6 (see `formwork/AGENTS.md`) |
 | `notes/` | Quick reference notes - JS, CSS, Browser, Node (see `notes/AGENTS.md`) |
 | `tang/` | Comprehensive learning notes - Docker, ES, MySQL, K8s, Java, etc. (see `tang/AGENTS.md`) |

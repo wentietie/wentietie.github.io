@@ -52,7 +52,8 @@ export default defineConfig({
           { text: 'ES6 入门', link: '/JavaScript/es6/es6-1', activeMatch: '^(?:/JavaScript/es6/|/JavaScript/es6/)' },
           { text: '你不知道的 JavaScript', link: '/JavaScript/youdontknowjs/part1', activeMatch: '^(?:/JavaScript/youdontknowjs/|/JavaScript/youdontknowjs/)' },
           { text: '设计模式', link: '/JavaScript/design/readme', activeMatch: '^(?:/JavaScript/design/|/JavaScript/design/)' },
-          { text: 'TypeScript', link: '/JavaScript/typescript/ts-basic', activeMatch: '^(?:/JavaScript/typescript/ts-basic|/JavaScript/typescript/ts-basic)(\\.html)?$' }
+          { text: 'TypeScript', link: '/JavaScript/typescript/ts-basic', activeMatch: '^(?:/JavaScript/typescript/ts-basic|/JavaScript/typescript/ts-basic)(\\.html)?$' },
+          { text: '重学前端', link: '/frontend/part1', activeMatch: '^(?:/frontend/|/frontend/)' }
         ]
       },
       {
@@ -389,6 +390,23 @@ export default defineConfig({
           text: 'TypeScript',
           items: [
             { text: 'TS 基础', link: '/JavaScript/typescript/ts-basic' }
+          ]
+        }
+      ],
+      '/frontend/': [
+        {
+          text: '重学前端',
+          items: [
+            { text: '导语：前端学习方法与知识体系', link: '/frontend/part1' },
+            { text: 'HTML 语义', link: '/frontend/part2' },
+            { text: 'HTML 语义：语义标签呈现 Wiki 网页', link: '/frontend/part3' },
+            { text: 'JavaScript 类型：你不知道的细节', link: '/frontend/part4' },
+            { text: '浏览器是如何工作的（一）：HTTP', link: '/frontend/part5' },
+            { text: '浏览器是如何工作的（二）：整体流程与 DOM 构建', link: '/frontend/part6' },
+            { text: '浏览器是如何工作的（三）：CSS 加载与 CSSOM', link: '/frontend/part7' },
+            { text: '浏览器是如何工作的（四）：排版', link: '/frontend/part8' },
+            { text: '浏览器是如何工作的（五）：渲染、合成与绘制', link: '/frontend/part9' },
+            { text: 'JavaScript 执行（一）：Promise 与 setTimeout', link: '/frontend/part10' }
           ]
         }
       ],
