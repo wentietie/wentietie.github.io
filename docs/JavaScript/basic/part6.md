@@ -52,7 +52,7 @@ function shuffle (arr) {
 ## 插入排序
 将第一个元素作为有序序列，遍历后面未排序的元素，一个个与已经排序的元素做比较，并且排到前面
 
-![插入排序](/JavaScript/basic/img/insertionsort.gif)
+![插入排序](./img/insertionsort.gif)
 
 ```js
 function insertionSort(arr) {
@@ -83,7 +83,7 @@ console.log(insertionSort(arr));
 2. 小于"基准"的元素，都移到"基准"的左边；大于"基准"的元素，都移到"基准"的右边。
 3. 对"基准"左边和右边的两个子集，不断重复第一步和第二步，直到所有子集只剩下一个元素为止。
 
-![快速排序](/JavaScript/basic/img/quicksort.gif)
+![快速排序](./img/quicksort.gif)
 
 ```js
 var quickSort = function(arr) {

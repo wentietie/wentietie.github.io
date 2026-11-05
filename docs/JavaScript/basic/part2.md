@@ -21,4 +21,4 @@
 
 [从探究Function.**proto**===Function.prototype过程中的一些收获](https://github.com/jawil/blog/issues/13)
 
-![原型图](/JavaScript/basic/img/proto.png)
+![原型图](./img/proto.png)
